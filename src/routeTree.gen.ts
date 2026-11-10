@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnalisisFuncionalRouteImport } from './routes/analisis-funcional'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as ProjectManagementRouteImport } from './routes/project-management'
+import { Route as QaRouteImport } from './routes/qa'
+import { Route as SobreMiRouteImport } from './routes/sobre-mi'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnalisisFuncionalRoute = AnalisisFuncionalRouteImport.update({
+  id: '/analisis-funcional',
+  path: '/analisis-funcional',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectManagementRoute = ProjectManagementRouteImport.update({
+  id: '/project-management',
+  path: '/project-management',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QaRoute = QaRouteImport.update({
+  id: '/qa',
+  path: '/qa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreMiRoute = SobreMiRouteImport.update({
+  id: '/sobre-mi',
+  path: '/sobre-mi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analisis-funcional': typeof AnalisisFuncionalRoute
+  '/contacto': typeof ContactoRoute
+  '/project-management': typeof ProjectManagementRoute
+  '/qa': typeof QaRoute
+  '/sobre-mi': typeof SobreMiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analisis-funcional': typeof AnalisisFuncionalRoute
+  '/contacto': typeof ContactoRoute
+  '/project-management': typeof ProjectManagementRoute
+  '/qa': typeof QaRoute
+  '/sobre-mi': typeof SobreMiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analisis-funcional': typeof AnalisisFuncionalRoute
+  '/contacto': typeof ContactoRoute
+  '/project-management': typeof ProjectManagementRoute
+  '/qa': typeof QaRoute
+  '/sobre-mi': typeof SobreMiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/analisis-funcional'
+    | '/contacto'
+    | '/project-management'
+    | '/qa'
+    | '/sobre-mi'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/analisis-funcional'
+    | '/contacto'
+    | '/project-management'
+    | '/qa'
+    | '/sobre-mi'
+  id:
+    | '__root__'
+    | '/'
+    | '/analisis-funcional'
+    | '/contacto'
+    | '/project-management'
+    | '/qa'
+    | '/sobre-mi'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalisisFuncionalRoute: typeof AnalisisFuncionalRoute
+  ContactoRoute: typeof ContactoRoute
+  ProjectManagementRoute: typeof ProjectManagementRoute
+  QaRoute: typeof QaRoute
+  SobreMiRoute: typeof SobreMiRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/analisis-funcional': {
+      id: '/analisis-funcional'
+      path: '/analisis-funcional'
+      fullPath: '/analisis-funcional'
+      preLoaderRoute: typeof AnalisisFuncionalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/project-management': {
+      id: '/project-management'
+      path: '/project-management'
+      fullPath: '/project-management'
+      preLoaderRoute: typeof ProjectManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/qa': {
+      id: '/qa'
+      path: '/qa'
+      fullPath: '/qa'
+      preLoaderRoute: typeof QaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre-mi': {
+      id: '/sobre-mi'
+      path: '/sobre-mi'
+      fullPath: '/sobre-mi'
+      preLoaderRoute: typeof SobreMiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalisisFuncionalRoute: AnalisisFuncionalRoute,
+  ContactoRoute: ContactoRoute,
+  ProjectManagementRoute: ProjectManagementRoute,
+  QaRoute: QaRoute,
+  SobreMiRoute: SobreMiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

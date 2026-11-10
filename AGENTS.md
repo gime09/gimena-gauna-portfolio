@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- All portfolio content (profile, areas, projects, metrics) lives in `src/data/portfolio.ts`; pages only render it, so content edits never touch layout code.
+- Shared shell (vertical nav, profile card, mobile bottom nav, noise background) lives in `src/routes/__root.tsx`; each section is its own route for SEO.
