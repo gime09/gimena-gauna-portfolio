@@ -36,14 +36,13 @@ export function ProfileCard({ className }: { className?: string }) {
   return (
     <div className={cn("rounded-3xl glass p-4 text-center", className)}>
       <div
-        className="relative overflow-hidden rounded-2xl aspect-[5/4] lg:aspect-square"
+        className="relative mx-auto aspect-square max-w-sm overflow-hidden rounded-2xl lg:max-w-none"
         style={{ background: "var(--gradient-photo)" }}
       >
         <img
           src={photo.url}
           alt="Retrato de Gimena Gauna"
-          className="absolute inset-x-0 bottom-0 mx-auto h-[108%] w-auto max-w-none object-contain object-bottom"
-          style={{ left: "50%", transform: "translateX(-50%)" }}
+          className="h-full w-full object-cover object-[50%_15%]"
           width={574}
           height={752}
         />
