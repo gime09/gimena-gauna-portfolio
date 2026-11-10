@@ -47,8 +47,8 @@ export function PageHeader({
 }: {
   eyebrow: string;
   title: string;
-  accent?: string;
-  description?: string;
+  accent?: string | undefined;
+  description?: string | undefined;
 }) {
   return (
     <header className="animate-rise">

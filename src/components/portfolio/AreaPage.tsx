@@ -17,7 +17,7 @@ export function AreaPage({
   area: AreaId;
   eyebrow: string;
   title: string;
-  accent?: string;
+  accent?: string | undefined;
   description: string;
   intro?: ReactNode;
   grouped?: boolean;
