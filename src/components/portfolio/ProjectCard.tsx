@@ -104,7 +104,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
 function ProjectDialogContent({ project }: { project: Project }) {
   return (
-    <DialogContent className="max-h-[88vh] w-[calc(100%-1.5rem)] max-w-2xl overflow-y-auto rounded-3xl border-glass-border glass-strong p-6 sm:p-8">
+    <DialogContent className="max-h-[88vh] w-[calc(100%-1.5rem)] max-w-2xl overflow-y-auto rounded-3xl border-glass-border bg-popover/95 p-6 backdrop-blur-xl sm:rounded-3xl sm:p-8">
       <div>
         <p className="text-xs font-semibold uppercase tracking-widest text-primary">{project.group}</p>
         <DialogTitle className="mt-2 pr-6 text-2xl font-bold leading-tight sm:text-3xl">
