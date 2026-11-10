@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnalisisFuncionalRouteImport } from './routes/analisis-funcional'
+import { Route as ProjectManagementRouteImport } from './routes/project-management'
+import { Route as QaRouteImport } from './routes/qa'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnalisisFuncionalRoute = AnalisisFuncionalRouteImport.update({
+  id: '/analisis-funcional',
+  path: '/analisis-funcional',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectManagementRoute = ProjectManagementRouteImport.update({
+  id: '/project-management',
+  path: '/project-management',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QaRoute = QaRouteImport.update({
+  id: '/qa',
+  path: '/qa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analisis-funcional': typeof AnalisisFuncionalRoute
+  '/project-management': typeof ProjectManagementRoute
+  '/qa': typeof QaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analisis-funcional': typeof AnalisisFuncionalRoute
+  '/project-management': typeof ProjectManagementRoute
+  '/qa': typeof QaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analisis-funcional': typeof AnalisisFuncionalRoute
+  '/project-management': typeof ProjectManagementRoute
+  '/qa': typeof QaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/analisis-funcional' | '/project-management' | '/qa'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/analisis-funcional' | '/project-management' | '/qa'
+  id: '__root__' | '/' | '/analisis-funcional' | '/project-management' | '/qa'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalisisFuncionalRoute: typeof AnalisisFuncionalRoute
+  ProjectManagementRoute: typeof ProjectManagementRoute
+  QaRoute: typeof QaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/analisis-funcional': {
+      id: '/analisis-funcional'
+      path: '/analisis-funcional'
+      fullPath: '/analisis-funcional'
+      preLoaderRoute: typeof AnalisisFuncionalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/project-management': {
+      id: '/project-management'
+      path: '/project-management'
+      fullPath: '/project-management'
+      preLoaderRoute: typeof ProjectManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/qa': {
+      id: '/qa'
+      path: '/qa'
+      fullPath: '/qa'
+      preLoaderRoute: typeof QaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalisisFuncionalRoute: AnalisisFuncionalRoute,
+  ProjectManagementRoute: ProjectManagementRoute,
+  QaRoute: QaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

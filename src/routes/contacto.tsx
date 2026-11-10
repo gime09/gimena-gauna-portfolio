@@ -1,0 +1,91 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ArrowUpRight, Check, Copy, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { useState } from "react";
+
+import { PageHeader, trackSpotlight } from "@/components/portfolio/ui";
+import { profile } from "@/data/portfolio";
+
+export const Route = createFileRoute("/contacto")({
+  head: () => ({
+    meta: [
+      { title: "Contacto · Gimena Gauna" },
+      {
+        name: "description",
+        content: "Contactá a Gimena Gauna por correo, WhatsApp, LinkedIn o GitHub.",
+      },
+      { property: "og:title", content: "Contacto · Gimena Gauna" },
+      { property: "og:description", content: "Hablemos de tu próximo proyecto de software." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: ContactPage,
+});
+
+const channels = [
+  { icon: Mail, label: "Correo", value: profile.email, href: `mailto:${profile.email}` },
+  { icon: MessageCircle, label: "WhatsApp", value: profile.whatsappDisplay, href: profile.whatsappUrl },
+  { icon: Linkedin, label: "LinkedIn", value: "gimena-gauna", href: profile.linkedin },
+  { icon: Github, label: "GitHub", value: "gime09", href: profile.github },
+];
+
+function ContactPage() {
+  const [copied, setCopied] = useState(false);
+
+  async function copyEmail() {
+    await navigator.clipboard.writeText(profile.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
+  return (
+    <div className="space-y-10">
+      <PageHeader
+        eyebrow="Contacto"
+        title="Trabajemos"
+        accent="juntos"
+        description="¿Buscás a alguien para QA, análisis funcional o gestión de proyectos? Escribime por el canal que te quede más cómodo. También te envío mi CV."
+      />
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        {channels.map((c) => (
+          <a
+            key={c.label}
+            href={c.href}
+            target={c.href.startsWith("mailto") ? undefined : "_blank"}
+            rel="noreferrer"
+            onMouseMove={trackSpotlight}
+            className="spotlight group flex items-center gap-4 rounded-2xl glass p-5"
+          >
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+              <c.icon className="h-5 w-5" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                {c.label}
+              </span>
+              <span className="block truncate font-semibold">{c.value}</span>
+            </span>
+            <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:rotate-45 group-hover:text-primary" />
+          </a>
+        ))}
+      </div>
+
+      <div className="flex flex-col items-start gap-4 rounded-2xl glass p-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
+          <p className="font-bold">¿Querés mi CV?</p>
+          <p className="text-sm text-muted-foreground">
+            Pedímelo por correo o WhatsApp y te lo envío actualizado.
+          </p>
+        </div>
+        <button
+          onClick={copyEmail}
+          className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground"
+        >
+          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+          {copied ? "Correo copiado" : "Copiar correo"}
+        </button>
+      </div>
+    </div>
+  );
+}
