@@ -27,7 +27,7 @@ export function SideNav({ className }: { className?: string }) {
           key={item.to}
           to={item.to}
           activeOptions={{ exact: item.to === "/" }}
-          className="group relative grid h-16 w-16 place-items-center rounded-2xl glass text-foreground/85 transition-all duration-300 hover:-translate-y-0.5 hover:text-primary data-[status=active]:border-primary data-[status=active]:bg-primary data-[status=active]:text-primary-foreground data-[status=active]:shadow-[var(--shadow-glow)]"
+          className="group relative grid h-16 w-16 place-items-center rounded-2xl glass text-foreground/85 transition-all duration-300 hover:-translate-y-0.5 hover:text-primary data-[status=active]:border-primary data-[status=active]:bg-[image:var(--gradient-brand)] data-[status=active]:text-primary-foreground data-[status=active]:shadow-[var(--shadow-glow)]"
         >
           <item.icon className="h-6 w-6" strokeWidth={2.2} />
           <span className="pointer-events-none absolute left-[calc(100%+0.75rem)] top-1/2 -translate-y-1/2 -translate-x-1 whitespace-nowrap rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
@@ -54,7 +54,7 @@ export function BottomNav({ className }: { className?: string }) {
             <Link
               to={item.to}
               activeOptions={{ exact: item.to === "/" }}
-              className="flex flex-col items-center gap-0.5 rounded-2xl py-2 text-muted-foreground transition-colors data-[status=active]:bg-primary data-[status=active]:text-primary-foreground"
+              className="flex flex-col items-center gap-0.5 rounded-2xl py-2 text-muted-foreground transition-colors data-[status=active]:bg-[image:var(--gradient-brand)] data-[status=active]:text-primary-foreground"
             >
               <item.icon className="h-5 w-5" strokeWidth={2.2} />
               <span className="max-w-full truncate px-0.5 text-[10px] font-semibold leading-tight">
