@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { ProfileCard } from "@/components/portfolio/ProfileCard";
 import { ProjectCard } from "@/components/portfolio/ProjectCard";
-import { Eyebrow, GlassCard, RotatingBadge, trackSpotlight } from "@/components/portfolio/ui";
+import { Eyebrow, GlassCard, trackSpotlight } from "@/components/portfolio/ui";
 import { areas, profile, projectsByArea, type AreaId } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -53,11 +53,7 @@ function Index() {
             funciona
           </span>
         </h1>
-        <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
-          <RotatingBadge
-            text="Técnica en Programación · UTN · QA · PM · "
-            className="hidden text-foreground sm:block"
-          />
+        <div className="mt-8">
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             {profile.bio}
           </p>
