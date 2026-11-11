@@ -27,10 +27,10 @@ export function SideNav({ className }: { className?: string }) {
           key={item.to}
           to={item.to}
           activeOptions={{ exact: item.to === "/" }}
-          className="group relative grid h-16 w-16 place-items-center rounded-2xl glass text-foreground/85 transition-all duration-300 hover:-translate-y-0.5 hover:text-primary data-[status=active]:border-primary data-[status=active]:bg-[image:var(--gradient-brand)] data-[status=active]:text-brand-foreground data-[status=active]:shadow-[var(--shadow-glow)]"
+          className="group relative grid h-16 w-16 place-items-center rounded-2xl glass text-foreground/85 transition-all duration-300 hover:z-50 hover:-translate-y-0.5 hover:text-primary data-[status=active]:border-primary data-[status=active]:bg-[image:var(--gradient-brand)] data-[status=active]:text-brand-foreground data-[status=active]:shadow-[var(--shadow-glow)]"
         >
           <item.icon className="h-6 w-6" strokeWidth={2.2} />
-          <span className="pointer-events-none absolute left-[calc(100%+0.75rem)] top-1/2 -translate-y-1/2 -translate-x-1 whitespace-nowrap rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+          <span className="pointer-events-none absolute left-[calc(100%+0.75rem)] top-1/2 z-50 -translate-y-1/2 -translate-x-1 whitespace-nowrap rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
             {item.label}
           </span>
         </Link>
