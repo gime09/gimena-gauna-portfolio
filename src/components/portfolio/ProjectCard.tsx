@@ -89,7 +89,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <DialogTrigger asChild>
-            <button className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-bold text-primary-foreground transition-transform hover:-translate-y-0.5">
+            <button className="inline-flex items-center gap-1.5 rounded-full btn-iridescent px-3.5 py-1.5 text-xs font-bold text-brand-foreground transition-transform hover:-translate-y-0.5">
               Ver detalle
             </button>
           </DialogTrigger>
@@ -158,7 +158,7 @@ function ProjectDialogContent({ project }: { project: Project }) {
           href={project.repo}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex w-fit items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground"
+          className="inline-flex w-fit items-center gap-2 rounded-full btn-iridescent px-5 py-2.5 text-sm font-bold text-brand-foreground"
         >
           <Github className="h-4 w-4" /> Abrir repositorio
         </a>
