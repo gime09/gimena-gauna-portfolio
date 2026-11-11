@@ -157,7 +157,7 @@ function RootComponent() {
         </header>
 
         <div className="mx-auto w-full max-w-[1440px] px-4 pb-32 pt-6 sm:px-6 lg:grid lg:grid-cols-[64px_minmax(0,320px)_minmax(0,1fr)] lg:gap-6 lg:px-8 lg:pb-12 lg:pt-10 xl:grid-cols-[64px_360px_minmax(0,1fr)] xl:gap-8">
-          <SideNav className="hidden lg:sticky lg:top-10 lg:flex lg:self-start" />
+          <SideNav className="hidden lg:sticky lg:top-10 lg:z-20 lg:flex lg:self-start" />
           <aside className="hidden lg:sticky lg:top-10 lg:block lg:self-start">
             <ProfileCard />
           </aside>
