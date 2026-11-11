@@ -143,14 +143,14 @@ function RootComponent() {
       <div className="relative min-h-screen">
         <header className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 glass-strong border-x-0 border-t-0 lg:hidden">
           <Link to="/" className="flex min-w-0 items-center gap-2">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary font-serif text-lg italic text-primary-foreground">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl btn-iridescent font-serif text-lg italic text-brand-foreground">
               GG
             </span>
             <span className="truncate font-bold">Gimena Gauna</span>
           </Link>
           <Link
             to="/contacto"
-            className="shrink-0 rounded-full bg-primary px-4 py-2 text-xs font-bold text-primary-foreground"
+            className="shrink-0 rounded-full btn-iridescent px-4 py-2 text-xs font-bold text-brand-foreground"
           >
             Contacto
           </Link>

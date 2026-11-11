@@ -57,7 +57,7 @@ export function ProfileCard({ className }: { className?: string }) {
       <SocialLinks className="mt-5" />
       <Link
         to="/contacto"
-        className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-glow)]"
+        className="mt-6 inline-flex items-center gap-2 rounded-full btn-iridescent px-6 py-3 text-sm font-bold uppercase tracking-wide text-brand-foreground transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-glow)]"
       >
         CV / Contacto <Send className="h-4 w-4" />
       </Link>

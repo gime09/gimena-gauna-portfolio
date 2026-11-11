@@ -82,7 +82,7 @@ export function AreaSwitcher({ current }: { current: AreaId }) {
           className={cn(
             "flex-1 whitespace-nowrap rounded-full px-4 py-2 text-center text-sm font-semibold transition-colors sm:flex-none",
             a.id === current
-              ? "bg-primary text-primary-foreground"
+              ? "btn-iridescent text-brand-foreground"
               : "text-muted-foreground hover:text-foreground",
           )}
         >
