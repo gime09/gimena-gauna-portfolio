@@ -106,21 +106,4 @@ export function SectionTitle({ children, count }: { children: ReactNode; count?:
   );
 }
 
-export function RotatingBadge({ text, className }: { text: string; className?: string }) {
-  return (
-    <div className={cn("relative h-32 w-32 shrink-0", className)}>
-      <svg viewBox="0 0 100 100" className="animate-spin-slow h-full w-full">
-        <defs>
-          <path id="badge-circle" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" />
-        </defs>
-        <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" strokeWidth="1" />
-        <text className="fill-current text-[9.5px] font-semibold uppercase tracking-[0.18em]">
-          <textPath href="#badge-circle">{text}</textPath>
-        </text>
-      </svg>
-      <span className="absolute inset-0 grid place-items-center font-serif text-3xl italic text-primary">
-        GG
-      </span>
-    </div>
-  );
-}
+
