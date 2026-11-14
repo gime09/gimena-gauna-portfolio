@@ -46,7 +46,7 @@ function Index() {
       <ProfileCard className="lg:hidden" />
 
       <section className="animate-rise">
-        <Eyebrow>Hola, soy Gimena · QA Engineer</Eyebrow>
+        <Eyebrow>Hola, soy Gimena · Bienvenidos a mi portafolio</Eyebrow>
         <h1 className="mt-4 text-[2.6rem] font-bold leading-[1.02] tracking-tight sm:text-6xl xl:text-7xl">
           Calidad, análisis y gestión para software que{" "}
           <span className="font-serif font-normal italic text-primary underline decoration-2 underline-offset-8">
