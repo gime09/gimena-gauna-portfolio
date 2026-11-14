@@ -29,7 +29,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const highlights = [{ value: "3", label: "áreas de especialidad" }];
+const highlights = [{ value: "3", label: "áreas de especialidades" }];
 
 function Index() {
   const [area, setArea] = useState<AreaId>("qa");
