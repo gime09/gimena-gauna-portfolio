@@ -56,8 +56,8 @@ function Index() {
       <section>
         {highlights.map((h) => (
           <GlassCard key={h.label} interactive className="flex items-center justify-center gap-3 p-4 sm:p-5">
-            <p className="text-3xl font-bold text-primary">{h.value}</p>
-            <p className="text-sm leading-snug text-muted-foreground">{h.label}</p>
+            <p className="text-4xl font-bold text-primary sm:text-5xl">{h.value}</p>
+            <p className="text-base leading-snug text-muted-foreground sm:text-lg">{h.label}</p>
           </GlassCard>
         ))}
       </section>
