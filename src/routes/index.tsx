@@ -29,12 +29,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const highlights = [
-  { value: "117", label: "pruebas con agentes de IA" },
-  { value: "912", label: "HH gestionadas" },
-  { value: "46", label: "escenarios BDD" },
-  { value: "3", label: "áreas de especialidad" },
-];
+const highlights = [{ value: "3", label: "áreas de especialidad" }];
 
 function Index() {
   const [area, setArea] = useState<AreaId>("qa");
@@ -58,11 +53,11 @@ function Index() {
         </p>
       </section>
 
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <section>
         {highlights.map((h) => (
-          <GlassCard key={h.label} interactive className="p-4 sm:p-5">
+          <GlassCard key={h.label} interactive className="flex items-center justify-center gap-3 p-4 sm:p-5">
             <p className="text-3xl font-bold text-primary">{h.value}</p>
-            <p className="mt-1 text-xs leading-snug text-muted-foreground">{h.label}</p>
+            <p className="text-sm leading-snug text-muted-foreground">{h.label}</p>
           </GlassCard>
         ))}
       </section>
