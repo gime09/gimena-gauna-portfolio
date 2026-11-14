@@ -20,7 +20,7 @@ export const profile = {
   title: "Técnica en Programación (UTN) · QA Engineer · Project Manager · Analista Funcional",
   shortBio:
     "Participo en el ciclo completo del software: entiendo el negocio, analizo, planifico y aseguro la calidad.",
-  bio: "Técnica en Programación (UTN), con experiencia y formación en QA, Análisis Funcional y Project Management. Participo en el ciclo completo de software: comprensión de negocio, análisis funcional, planificación y aseguramiento de calidad. Vengo de la docencia (Profesora de Historia) y del marketing digital, y traigo de ahí empatía, comunicación con stakeholders y atención al detalle.",
+  bio: "Técnica en Programación (UTN), con experiencia y formación en QA, Análisis Funcional y Project Management. Participo en el ciclo completo de software: comprensión de negocio, análisis funcional, planificación y aseguramiento de calidad.",
   email: "gimegauna12345678@gmail.com",
   whatsappDisplay: "+54 9 261 5259143",
   whatsappUrl: "https://wa.me/5492615259143",

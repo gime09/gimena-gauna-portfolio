@@ -53,11 +53,9 @@ function Index() {
             funciona
           </span>
         </h1>
-        <div className="mt-8">
-          <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {profile.bio}
-          </p>
-        </div>
+        <p className="mt-8 text-base leading-relaxed text-muted-foreground sm:text-lg">
+          {profile.bio}
+        </p>
       </section>
 
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
