@@ -42,7 +42,15 @@ export function ProfileCard({ className }: { className?: string }) {
         <img
           src={photo.url}
           alt="Retrato de Gimena Gauna"
-          className="h-full w-full object-cover object-[50%_15%]"
+          className="h-full w-full object-cover object-[50%_0%]"
+          width={574}
+          height={752}
+        />
+        <img
+          src={photo.url}
+          alt=""
+          aria-hidden
+          className="figure-trace pointer-events-none absolute inset-0 h-full w-full object-cover object-[50%_0%]"
           width={574}
           height={752}
         />
