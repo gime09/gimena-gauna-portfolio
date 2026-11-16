@@ -32,3 +32,4 @@ use the editor.
 ## Project rules
 - All portfolio content (profile, areas, projects, metrics) lives in `src/data/portfolio.ts`; pages only render it, so content edits never touch layout code.
 - Shared shell (vertical nav, profile card, mobile bottom nav, noise background) lives in `src/routes/__root.tsx`; each section is its own route for SEO.
+- Keep the portrait and its alpha-derived SVG outline in identical geometry; animate the stroke, not a duplicate photo, so the moving line follows the actual silhouette.

@@ -7,4 +7,5 @@
 - [x] Sobre mí (formación, enfoque, aprendizaje continuo) y Contacto
 - [x] Proyectos en tarjetas responsive con métricas clave y enlaces a GitHub cuando existan
 - [x] Vista previa no abre con la cuenta de Gimena — revisado: la página funciona; el bloqueo es de inicio de sesión en Lovable (cookies/navegador)
-- [ ] Botón "Descargar CV" — espera el PDF del CV de Gimena
+- [x] Descargas de los cuatro CV en Contacto
+- [x] Delineado blanco animado sobre la silueta y foto más arriba, verificados en computadora y celular

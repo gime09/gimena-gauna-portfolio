@@ -132,6 +132,8 @@
     oklch(0.3 0.14 275) 100%
   );
   --shadow-glow: 0 18px 40px -16px color-mix(in oklab, var(--primary-magenta) 60%, transparent);
+  --portrait-outline: oklch(1 0 0);
+  --portrait-outline-glow: 0 0 3px var(--portrait-outline);
 }
 
 @layer base {
@@ -321,21 +323,29 @@
   animation: rise 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-/* Delineado blanco que recorre el contorno de la figura (foto con fondo transparente) */
+/* Photo and outline share the exact original geometry and upward offset. */
+.portrait-layer {
+  position: absolute;
+  top: -12%;
+  left: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 574 / 752;
+}
+
 @keyframes trace-outline {
-  0%,
-  100% { filter: drop-shadow(0 -2.5px 0 rgb(255 255 255 / 0.95)); }
-  12.5% { filter: drop-shadow(1.8px -1.8px 0 rgb(255 255 255 / 0.95)); }
-  25% { filter: drop-shadow(2.5px 0 0 rgb(255 255 255 / 0.95)); }
-  37.5% { filter: drop-shadow(1.8px 1.8px 0 rgb(255 255 255 / 0.95)); }
-  50% { filter: drop-shadow(0 2.5px 0 rgb(255 255 255 / 0.95)); }
-  62.5% { filter: drop-shadow(-1.8px 1.8px 0 rgb(255 255 255 / 0.95)); }
-  75% { filter: drop-shadow(-2.5px 0 0 rgb(255 255 255 / 0.95)); }
-  87.5% { filter: drop-shadow(-1.8px -1.8px 0 rgb(255 255 255 / 0.95)); }
+  to { stroke-dashoffset: -1000; }
 }
 
 .figure-trace {
-  animation: trace-outline 2.8s linear infinite;
+  fill: none;
+  stroke: var(--portrait-outline);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 180 820;
+  filter: drop-shadow(var(--portrait-outline-glow));
+  animation: trace-outline 6s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -346,5 +356,9 @@
   .animate-rise,
   .figure-trace {
     animation: none;
+  }
+
+  .figure-trace {
+    stroke-dasharray: none;
   }
 }
