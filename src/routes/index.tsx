@@ -34,7 +34,7 @@ const highlights = [{ value: "3", label: "áreas de especialidades" }];
 function Index() {
   const [area, setArea] = useState<AreaId>("qa");
   const current = areas.find((a) => a.id === area)!;
-  const preview = projectsByArea(area).slice(0, 4);
+  const preview = projectsByArea(area);
 
   return (
     <div className="space-y-10">
