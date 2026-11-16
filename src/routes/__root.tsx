@@ -84,17 +84,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gimena Gauna · QA, Project Management y Análisis Funcional" },
+      { title: "Gimena Gauna · QA, Gestión de proyectos y Análisis Funcional" },
       {
         name: "description",
         content:
-          "Portafolio de Gimena Gauna: Técnica en Programación (UTN), QA Engineer, Project Manager y Analista Funcional.",
+          "Portafolio de Gimena Gauna: Técnica en Programación (UTN), QA Engineer, Gestión de proyectos y Analista Funcional.",
       },
       { name: "author", content: "Gimena Gauna" },
       { property: "og:title", content: "Gimena Gauna · Portafolio" },
       {
         property: "og:description",
-        content: "QA & Testing, Project Management y Análisis Funcional.",
+        content: "QA & Testing, Gestión de proyectos y Análisis Funcional.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -11,11 +11,11 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Gimena Gauna · QA Engineer, Project Manager y Analista Funcional" },
+      { title: "Gimena Gauna · QA Engineer, Gestión de proyectos y Analista Funcional" },
       {
         name: "description",
         content:
-          "Portafolio de Gimena Gauna, Técnica en Programación (UTN): proyectos de QA & Testing, Project Management y Análisis Funcional.",
+          "Portafolio de Gimena Gauna, Técnica en Programación (UTN): proyectos de QA & Testing, Gestión de proyectos y Análisis Funcional.",
       },
       { property: "og:title", content: "Gimena Gauna · Portafolio" },
       {

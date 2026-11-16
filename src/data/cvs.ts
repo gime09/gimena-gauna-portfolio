@@ -21,7 +21,7 @@ export const cvs: CvFile[] = [
   },
   {
     id: "pm",
-    label: "Project Manager",
+    label: "Gestión de proyectos",
     description: "Gestión de proyectos, planificación, roadmap y metodologías ágiles.",
     url: cvPm.url,
     filename: "CV_Gimena_Gauna_PM.pdf",

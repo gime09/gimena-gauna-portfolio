@@ -17,10 +17,10 @@ export type Project = {
 
 export const profile = {
   name: "Gimena Gauna",
-  title: "Técnica en Programación (UTN) · QA Engineer · Project Manager · Analista Funcional",
+  title: "Técnica en Programación (UTN) · QA Engineer · Gestión de proyectos · Analista Funcional",
   shortBio:
     "Participo en el ciclo completo del software: entiendo el negocio, analizo, planifico y aseguro la calidad.",
-  bio: "Técnica en Programación (UTN), con experiencia y formación en QA, Análisis Funcional y Project Management. Participo en el ciclo completo de software: comprensión de negocio, análisis funcional, planificación y aseguramiento de calidad.",
+  bio: "Técnica en Programación (UTN), con experiencia y formación en QA, Análisis Funcional y Gestión de proyectos. Participo en el ciclo completo de software: comprensión de negocio, análisis funcional, planificación y aseguramiento de calidad.",
   email: "gimegauna12345678@gmail.com",
   whatsappDisplay: "+54 9 261 5259143",
   whatsappUrl: "https://wa.me/5492615259143",
@@ -46,7 +46,7 @@ export const areas: {
   {
     id: "pm",
     to: "/project-management",
-    label: "Project Management",
+    label: "Gestión de proyectos",
     tagline: "Portal de Autogestión de Turnos Médicos",
     description:
       "Caso integral de punta a punta: acta de constitución, kick off, Gantt, horas hombre, riesgos, desvíos y cierre.",
@@ -307,7 +307,7 @@ export const projects: Project[] = [
     ],
   },
 
-  // ───────────── Project Management ─────────────
+  // ───────────── Gestión de proyectos ─────────────
   {
     id: "pm-charter",
     area: "pm",

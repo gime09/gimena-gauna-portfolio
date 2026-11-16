@@ -47,7 +47,7 @@ const journey = [
   {
     icon: Target,
     title: "Hoy",
-    role: "QA · Project Management · Análisis Funcional",
+    role: "QA · Gestión de proyectos · Análisis Funcional",
     text: "Participación en el ciclo completo: negocio, análisis, planificación y calidad.",
   },
 ];
