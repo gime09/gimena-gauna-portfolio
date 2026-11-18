@@ -11,24 +11,18 @@ import {
 
 import { GlassCard, PageHeader, SectionTitle } from "@/components/portfolio/ui";
 import { profile } from "@/data/portfolio";
+import { canonical, pageMeta } from "@/data/site";
 
 export const Route = createFileRoute("/sobre-mi")({
   head: () => ({
-    meta: [
-      { title: "Sobre mí · Gimena Gauna" },
-      {
-        name: "description",
-        content:
-          "Trayectoria de Gimena Gauna: de Profesora de Historia y marketing digital a Técnica en Programación (UTN) en QA, PM y Análisis Funcional.",
-      },
-      { property: "og:title", content: "Sobre mí · Gimena Gauna" },
-      {
-        property: "og:description",
-        content: "Formación, enfoque metodológico y aprendizaje continuo.",
-      },
-      { property: "og:type", content: "profile" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    meta: pageMeta({
+      title: "Sobre mí · Gimena Gauna",
+      description:
+        "Trayectoria de Gimena Gauna: de Profesora de Historia y marketing digital a Técnica en Programación (UTN) en QA, PM y Análisis Funcional.",
+      path: "/sobre-mi",
+      type: "profile",
+    }),
+    links: canonical("/sobre-mi"),
   }),
   component: AboutPage,
 });

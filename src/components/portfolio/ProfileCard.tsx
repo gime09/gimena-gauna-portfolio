@@ -49,7 +49,7 @@ export function ProfileCard({ className }: { className?: string }) {
   return (
     <div className={cn("rounded-3xl glass p-4 text-center", className)}>
       <div
-        className="relative mx-auto aspect-square max-w-sm overflow-hidden rounded-2xl lg:max-w-none"
+        className="relative mx-auto aspect-square max-w-[14rem] overflow-hidden rounded-2xl sm:max-w-sm lg:max-w-none"
         style={{ background: "var(--gradient-photo)" }}
       >
         {hasPhoto ? (
@@ -82,7 +82,7 @@ export function ProfileCard({ className }: { className?: string }) {
       <p className="mx-auto mt-2 max-w-xs text-[13px] font-medium leading-relaxed text-primary">
         {profile.title}
       </p>
-      <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
+      <p className="mx-auto mt-3 line-clamp-2 max-w-xs text-sm leading-relaxed text-muted-foreground lg:line-clamp-none">
         {profile.shortBio}
       </p>
       <SocialLinks className="mt-5" />
@@ -92,9 +92,6 @@ export function ProfileCard({ className }: { className?: string }) {
       >
         CV / Contacto <Send className="h-4 w-4" />
       </Link>
-      <p className="mt-5 text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Gimena Gauna
-      </p>
     </div>
   );
 }

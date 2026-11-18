@@ -14,25 +14,33 @@ import {
   projectsByArea,
   type AreaId,
 } from "@/data/portfolio";
+import { canonical, jsonLd, OG_IMAGE, pageMeta, SITE_NAME, SITE_URL } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Gimena Gauna · QA, Gestión de proyectos y Análisis Funcional" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Gimena Gauna · QA, Gestión de proyectos y Análisis Funcional",
+        description:
           "Portafolio de Gimena Gauna, Técnica en Programación (UTN): proyectos de QA & Testing, Gestión de proyectos y Análisis Funcional.",
-      },
-      { property: "og:title", content: "Gimena Gauna · Portafolio" },
-      {
-        property: "og:description",
-        content: "Calidad, análisis y gestión para software que funciona.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+        path: "/",
+      }),
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: SITE_NAME,
+        jobTitle: "QA Engineer · Gestión de proyectos · Analista Funcional",
+        description: profile.bio,
+        url: SITE_URL,
+        image: OG_IMAGE.url,
+        email: `mailto:${profile.email}`,
+        sameAs: [profile.github, profile.linkedin],
+        knowsAbout: ["QA & Testing", "Gestión de proyectos", "Análisis Funcional"],
+        alumniOf: { "@type": "CollegeOrUniversity", name: "UTN" },
+      }),
     ],
+    links: canonical("/"),
   }),
   component: Index,
 });

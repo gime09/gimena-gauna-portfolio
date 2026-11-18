@@ -3,25 +3,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AreaPage } from "@/components/portfolio/AreaPage";
 import { EffortBars } from "@/components/portfolio/ProjectCard";
 import { GlassCard } from "@/components/portfolio/ui";
+import { canonical, pageMeta } from "@/data/site";
 
 export const Route = createFileRoute("/project-management")({
   head: () => ({
-    meta: [
-      { title: "Gestión de proyectos · Gimena Gauna" },
-      {
-        name: "description",
-        content:
-          "Caso integral de gestión: Portal de Autogestión de Turnos Médicos, del acta de constitución al acta de cierre.",
-      },
-      { property: "og:title", content: "Gestión de proyectos · Gimena Gauna" },
-      {
-        property: "og:description",
-        content:
-          "Portal de Turnos Médicos: 13 semanas, 8 riesgos, 912 HH y cierre bajo presupuesto.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    meta: pageMeta({
+      title: "Gestión de proyectos · Gimena Gauna",
+      description:
+        "Caso integral de gestión: Portal de Autogestión de Turnos Médicos, del acta de constitución al acta de cierre.",
+      path: "/project-management",
+    }),
+    links: canonical("/project-management"),
   }),
   component: PmPage,
 });

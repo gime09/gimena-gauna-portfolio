@@ -1,89 +1,79 @@
-# Gimena Gauna Portfolio
+# Portafolio — Gimena Gauna
 
-Crear mi portafolio web interactivo y responsive para mobile en base a mi portafolio de Notion y las capturas de diseño adjuntas:
+Sitio personal de Gimena Gauna: Técnica en Programación (UTN), QA Engineer, Gestión de proyectos y Analista Funcional.
 
-Diseño visual (basado en Captura1.JPG y Captura2.JPG):
+Dark theme con fondo animado, tarjeta de perfil, navegación lateral en escritorio y barra inferior en móvil.
 
-- Tema oscuro con fondo noise effect animado (con movimiento sutil).
-- Barra de navegación vertical con iconos en píldoras y acento ámbar/dorado para el estado activo.
-- Tarjeta de perfil lateral/destacada con mi foto adjunta (cv7_ccexpress.png), nombre "Gimena Gauna", título "Técnica en Programación (UTN) · QA Engineer · Project Manager · Analista Funcional", biografía breve, enlaces a redes sociales y botón "Descargar CV / Contacto".
-- Tarjetas de contenido estilo glassmorphism oscuro con bordes sutiles y detalles interactivos.
-- Totalmente responsive para móviles (menú adaptado a barra inferior o drawer en pantallas pequeñas).
+## Stack
 
-Información personal y contacto:
+- **TanStack Start** (React 19 + SSR) con routing por archivos
+- **Vite 8** + **Nitro** para el build de servidor
+- **Tailwind CSS v4** (config en `src/styles.css`)
+- **Radix UI** para diálogos y componentes accesibles
 
-- Nombre: Gimena Gauna
-- Perfil: Técnica en Programación (UTN), con experiencia y formación en QA, Análisis Funcional y Project Management.
-- Trayectoria y propuesta de valor: Participación en el ciclo completo de software (comprensión de negocio, análisis funcional, planificación y aseguramiento de calidad). Reconversión desde la docencia (Profesora de Historia) y marketing digital hacia tecnología, aportando empatía, comunicación con stakeholders y atención al detalle.
-- Enlaces de contacto:
-  - GitHub: https://github.com/gime09?tab=repositories
-  - LinkedIn: https://www.linkedin.com/in/gimena-gauna-08925a197/
-  - Correo: gimegauna12345678@gmail.com
-  - WhatsApp: +54 9 261 5259143
+## Requisitos
 
-Secciones y contenido de proyectos/evidencia:
+Node.js 22 o superior y npm.
 
-1. Pestañas o selector de perfiles para alternar entre las 3 áreas: QA & Testing, Project Management, y Análisis Funcional.
-
-2. Sección QA & Testing:
-
-- QA Manual: Análisis y diseño de casos de prueba sobre DemoBlaze (requisitos, precondiciones, pasos y resultados esperados). Pruebas de caja negra con tablas de decisión (flujos de pago con tarjeta, bonos, descuentos).
-- QA de Servicios Web (APIs):
-  - SoapUI: Pruebas funcionales SOAP con AddInteger (casos positivo/negativo con validación de SLA y códigos HTTP 200/400) y CountryInfo FullCountryInfo (código ISO válido "AR", código inexistente "ZY" y XML malformado con manejo de errores).
-  - Postman Rendimiento (Performance Testing): API de feriados (date.nager.at) con Spike test desde Runner (100 VU, 1.092 requests enviados, throughput de 15,85 req/s, tiempo promedio de 20ms, 0% error, análisis de percentiles 90th/95th/99th).
-  - Postman Funcional REST: API reqres.in creación de usuarios (definición de alcance funcional vs rendimiento, casos de prueba con y sin body, validaciones 201 Created vs 400 Bad Request).
-  - Postman Data-Driven Testing: Runner con archivo CSV sobre API LongWeekend (5 iteraciones, 15 validaciones pasadas, scripts Post-res para status, body y SLA).
-  - Newman CLI: Reporte HTML interactivo (htmlextra) sobre registro en reqres.in, con diagnóstico real de falla en tiempo de respuesta (564ms vs umbral de 500ms).
-- QA Automatizado (Repositorio: https://github.com/gime09/QA-Automation-Selenium):
-  - Selenium WebDriver + Java 11/17/23 + TestNG + Maven + Page Object Model (POM) sobre SauceDemo, OrangeHRM y Automation Practice.
-  - Cross-browser testing en Chrome, Firefox y Edge, y consultas JDBC a base de datos MySQL para datos de prueba.
-  - Automatización con IA y Self-Healing Locators (librería AutoHeal locator con Gemini, manejo de esperas explícitas y sincronización en React SPAs).
-- QA con Agentes de IA (Repositorio: https://github.com/gime09/ai-qa-testing):
-  - Ciclo STLC completo con agentes especializados (Claude Code + Playwright MCP) sobre e-commerce ToolShop con enfoque human-in-the-loop.
-  - Métricas: 117 pruebas ejecutadas (94 aprobadas, 17 fallidas, 6 bloqueadas), 49 casos manuales + 46 escenarios BDD Gherkin, 41 ambigüedades detectadas, 10 bug reports formalizados y dashboard de cierre Go/No-Go.
-
-3. Sección Project Management (Caso integral: Portal de Autogestión de Turnos Médicos):
-
-- Acta de Constitución: Presupuesto inicial ($8.500.000 con reserva de contingencia), objetivos, alcance, interesados y criterios de éxito.
-- Presentación Kick Off: 12 diapositivas con agenda, gobierno, metodología ágil (sprints quincenales) y cronograma de alto nivel.
-- Cronograma Gantt: 19 tareas distribuidas en 3 fases (Análisis y Diseño, Construcción e Implementación, Producción) a lo largo de 13 semanas.
-- Control de Horas Hombre (HH): Seguimiento semanal por actividad y colaborador para 6 roles del equipo.
-- Plan de Gestión de Riesgos: Matriz probabilidad/impacto con 8 riesgos identificados, planes de respuesta y monitoreo.
-- Informe Programación Inicial vs Final: Análisis de desviación de 20 días por actualización no comunicada en librería de autenticación externa, con acciones correctivas implementadas.
-- Cuantificación de Esfuerzos: Análisis de 800 HH iniciales vs 912 HH reales (14% de sobrecosto por la contingencia técnica) y roadmap de fases futuras (1.100 HH).
-- Acta de Cierre: Liquidación final de $8.180.000, balance de objetivos y lecciones aprendidas sobre gestión de dependencias externas.
-
-4. Sección Análisis Funcional:
-
-- Relevamiento y Análisis de Sistema (Portal de Turnos Médicos): Mapa de aplicaciones actual vs nuevo portal, reglas de validación documentadas y no documentadas, matriz de falencias y oportunidades de mejora priorizadas.
-- MoneyMate App (Ingeniería de requerimientos completa):
-  - Desglose jerárquico: Épicas > Historias de Usuario > Características > Tareas distribuidas por rol (UX, Frontend, Backend, QA, Seguridad).
-  - Elicitación y especificación: Simulación de entrevistas, modelado de Casos de Uso vs HdU, especificación BDD en Gherkin (Given/When/Then) y estimación con Planning Poker (Fibonacci).
-  - Priorización y roadmap: Matriz valor vs esfuerzo y mapa de releases/sprints (2 releases, 4 sprints con aislamiento de riesgos técnicos).
-
-5. Sección "Sobre Mí" y experiencia:
-
-- Formación académica: Técnica en Programación (UTN), Profesora de Historia.
-- Enfoque metodológico y aprendizaje continuo.
-- Modal o visualizadores para inspeccionar el detalle de cada proyecto y caso de estudio.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f9e2ccf0-31c4-4b09-b518-29ab38a27ff8).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Comandos
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+npm install     # instalar dependencias
+npm run dev     # servidor local en http://localhost:8080
+npm run build   # build de producción
+npm run preview # previsualizar el build
+npm test        # tests (Vitest)
+npm run lint    # ESLint + Prettier
+npm run format  # formatear todo el repo
 ```
+
+## Dónde está cada cosa
+
+| Qué | Archivo |
+| --- | --- |
+| Perfil, áreas, proyectos y métricas | `src/data/portfolio.ts` |
+| Descargas de CV (rutas y nombres) | `src/data/cvs.ts` |
+| Shell: nav, perfil, footer, 404 y error | `src/routes/__root.tsx` |
+| Páginas: inicio, áreas, sobre mí, contacto | `src/routes/*.tsx` |
+| Foto y PDFs | `public/media/` |
+| Estilos y variables de color | `src/styles.css` |
+
+Todo el contenido vive en `src/data/portfolio.ts`; las páginas solo lo renderizan. Para agregar un proyecto alcanza con sumar un objeto a `projects` (con `featured: true` aparece en la home).
+
+## Assets
+
+En `public/media/`:
+
+- `gimena-gauna.webp` — retrato 574×752 con transparencia (29 KB)
+- `cv-gimena-gauna-qa.pdf`
+- `cv-gimena-gauna-pm.pdf`
+- `cv-gimena-gauna-pmo.pdf`
+- `cv-gimena-gauna-analista-funcional.pdf`
+
+Para reemplazar un CV, pisá el archivo manteniendo el nombre. La foto debe conservar la proporción 574×752 porque el delineado animado (`src/data/portrait-outline.ts`) se extrajo de esa geometría.
+
+## Publicar en Vercel
+
+El proyecto ya está preparado: `vercel.json` define el build y Nitro detecta Vercel solo.
+
+1. Entrá a [vercel.com](https://vercel.com), iniciá sesión con GitHub.
+2. **Add New → Project** e importá `gime09/gimena-gauna-portfolio`.
+3. En *Production Branch* elegí la rama que quieras publicar (`main` o `Andromeda`).
+4. Dejá el resto por defecto y presioná **Deploy**.
+
+Vercel corre `npm run build` y toma la salida `.vercel/output` (Build Output API), que incluye la función SSR y los estáticos. Cada push a la rama elegida redeploya automáticamente.
+
+Con dominio propio, agregalo en **Settings → Domains** y luego actualizá `SITE_URL` en `src/data/site.ts` (canonical, og:image, sitemap y JSON-LD se arman a partir de esa constante).
+
+## Ramas
+
+- `main`: versión publicada.
+- `Andromeda`: línea de trabajo donde se hizo la migración de assets a Lovable, accesibilidad y rediseño de la home.
+
+## Nota sobre Lovable
+
+El proyecto nació en Lovable y sigue vinculado (ver `AGENTS.md`). Los cambios de esta rama son compatibles: no se reescribió el historial ni se tocó `main`. Esta versión ya no depende de Lovable para funcionar, porque la foto y los CV son archivos del repositorio.
+
+## Contenido de referencia
+
+El brief original con el detalle completo de cada proyecto quedó documentado en `src/data/portfolio.ts`, que es la fuente de verdad.

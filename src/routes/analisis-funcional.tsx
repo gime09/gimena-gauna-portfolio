@@ -2,24 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { AreaPage } from "@/components/portfolio/AreaPage";
 import { GlassCard } from "@/components/portfolio/ui";
+import { canonical, pageMeta } from "@/data/site";
 
 export const Route = createFileRoute("/analisis-funcional")({
   head: () => ({
-    meta: [
-      { title: "Análisis Funcional · Gimena Gauna" },
-      {
-        name: "description",
-        content:
-          "Relevamiento del Portal de Turnos Médicos e ingeniería de requerimientos completa para MoneyMate App.",
-      },
-      { property: "og:title", content: "Análisis Funcional · Gimena Gauna" },
-      {
-        property: "og:description",
-        content: "Relevamiento, historias de usuario, BDD en Gherkin, Planning Poker y roadmap.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    meta: pageMeta({
+      title: "Análisis Funcional · Gimena Gauna",
+      description:
+        "Relevamiento del Portal de Turnos Médicos e ingeniería de requerimientos completa para MoneyMate App.",
+      path: "/analisis-funcional",
+    }),
+    links: canonical("/analisis-funcional"),
   }),
   component: FaPage,
 });

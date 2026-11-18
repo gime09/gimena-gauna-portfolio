@@ -18,9 +18,9 @@ export type Project = {
 
 export const profile = {
   name: "Gimena Gauna",
-  title: "Técnica en Programación (UTN) · QA Engineer · Gestión de proyectos · Analista Funcional",
+  title: "QA Engineer · Gestión de proyectos · Analista Funcional",
   shortBio:
-    "Participo en el ciclo completo del software: entiendo el negocio, analizo, planifico y aseguro la calidad.",
+    "Técnica en Programación (UTN). Participo en el ciclo completo del software: entiendo el negocio, analizo, planifico y aseguro la calidad.",
   bio: "Técnica en Programación (UTN), con formación en QA, Análisis Funcional y Gestión de proyectos. Participo en el ciclo completo de software: comprensión de negocio, análisis funcional, planificación y aseguramiento de calidad.",
   email: "gimegauna12345678@gmail.com",
   whatsappDisplay: "+54 9 261 5259143",
@@ -248,7 +248,7 @@ export const projects: Project[] = [
     metrics: [
       { value: "3", label: "Sitios automatizados" },
       { value: "3", label: "Navegadores" },
-      { value: "Java 11/17/23", label: "Versiones" },
+      { value: "11–23", label: "Versiones de Java" },
     ],
     sections: [
       {

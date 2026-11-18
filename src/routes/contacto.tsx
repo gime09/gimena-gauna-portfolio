@@ -15,20 +15,16 @@ import { useState } from "react";
 import { PageHeader, trackSpotlight } from "@/components/portfolio/ui";
 import { cvs } from "@/data/cvs";
 import { profile } from "@/data/portfolio";
+import { canonical, pageMeta } from "@/data/site";
 
 export const Route = createFileRoute("/contacto")({
   head: () => ({
-    meta: [
-      { title: "Contacto · Gimena Gauna" },
-      {
-        name: "description",
-        content: "Contactá a Gimena Gauna por correo, WhatsApp, LinkedIn o GitHub.",
-      },
-      { property: "og:title", content: "Contacto · Gimena Gauna" },
-      { property: "og:description", content: "Hablemos de tu próximo proyecto de software." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    meta: pageMeta({
+      title: "Contacto · Gimena Gauna",
+      description: "Contactá a Gimena Gauna por correo, WhatsApp, LinkedIn o GitHub.",
+      path: "/contacto",
+    }),
+    links: canonical("/contacto"),
   }),
   component: ContactPage,
 });
