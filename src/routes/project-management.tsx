@@ -16,7 +16,8 @@ export const Route = createFileRoute("/project-management")({
       { property: "og:title", content: "Gestión de proyectos · Gimena Gauna" },
       {
         property: "og:description",
-        content: "Portal de Turnos Médicos: 13 semanas, 8 riesgos, 912 HH y cierre bajo presupuesto.",
+        content:
+          "Portal de Turnos Médicos: 13 semanas, 8 riesgos, 912 HH y cierre bajo presupuesto.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -44,7 +45,9 @@ function PmPage() {
       intro={
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <GlassCard>
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary">Presupuesto</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+              Presupuesto
+            </p>
             <div className="mt-3 flex flex-wrap items-end gap-x-6 gap-y-2">
               <div>
                 <p className="text-xs text-muted-foreground">Inicial</p>
@@ -65,9 +68,12 @@ function PmPage() {
             </div>
           </GlassCard>
           <GlassCard>
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary">Esfuerzo (HH)</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+              Esfuerzo (HH)
+            </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              14% de sobrecosto en horas por la contingencia técnica con la librería de autenticación.
+              14% de sobrecosto en horas por la contingencia técnica con la librería de
+              autenticación.
             </p>
             <div className="mt-5">
               <EffortBars />

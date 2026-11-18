@@ -53,7 +53,9 @@ function FaPage() {
               </li>
             ))}
           </ol>
-          <p className="mt-3 text-xs text-muted-foreground">Roles: UX · Frontend · Backend · QA · Seguridad</p>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Roles: UX · Frontend · Backend · QA · Seguridad
+          </p>
         </GlassCard>
       }
     />

@@ -1,5 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, Check, Copy, Download, FileText, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import {
+  ArrowUpRight,
+  Check,
+  Copy,
+  Download,
+  FileText,
+  Github,
+  Linkedin,
+  Mail,
+  MessageCircle,
+} from "lucide-react";
 import { useState } from "react";
 
 import { PageHeader, trackSpotlight } from "@/components/portfolio/ui";
@@ -25,7 +35,12 @@ export const Route = createFileRoute("/contacto")({
 
 const channels = [
   { icon: Mail, label: "Correo", value: profile.email, href: `mailto:${profile.email}` },
-  { icon: MessageCircle, label: "WhatsApp", value: profile.whatsappDisplay, href: profile.whatsappUrl },
+  {
+    icon: MessageCircle,
+    label: "WhatsApp",
+    value: profile.whatsappDisplay,
+    href: profile.whatsappUrl,
+  },
   { icon: Linkedin, label: "LinkedIn", value: "gimena-gauna", href: profile.linkedin },
   { icon: Github, label: "GitHub", value: "gime09", href: profile.github },
 ];
@@ -34,9 +49,13 @@ function ContactPage() {
   const [copied, setCopied] = useState(false);
 
   async function copyEmail() {
-    await navigator.clipboard.writeText(profile.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${profile.email}`;
+    }
   }
 
   return (
@@ -59,8 +78,6 @@ function ContactPage() {
               key={cv.id}
               href={cv.url}
               download={cv.filename}
-              target="_blank"
-              rel="noreferrer"
               onMouseMove={trackSpotlight}
               className="spotlight group flex items-center gap-4 rounded-2xl glass p-5"
             >

@@ -68,17 +68,15 @@ export function PageHeader({
 
 export function AreaSwitcher({ current }: { current: AreaId }) {
   return (
-    <div
-      role="tablist"
-      aria-label="Áreas"
+    <nav
+      aria-label="Áreas del portafolio"
       className="inline-flex w-full gap-1 overflow-x-auto rounded-full glass p-1 sm:w-auto"
     >
       {areas.map((a) => (
         <Link
           key={a.id}
           to={a.to}
-          role="tab"
-          aria-selected={a.id === current}
+          aria-current={a.id === current ? "page" : undefined}
           className={cn(
             "flex-1 whitespace-nowrap rounded-full px-4 py-2 text-center text-sm font-semibold transition-colors sm:flex-none",
             a.id === current
@@ -89,7 +87,7 @@ export function AreaSwitcher({ current }: { current: AreaId }) {
           {a.label}
         </Link>
       ))}
-    </div>
+    </nav>
   );
 }
 
@@ -105,5 +103,3 @@ export function SectionTitle({ children, count }: { children: ReactNode; count?:
     </div>
   );
 }
-
-

@@ -1,5 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { Bug, FileSearch, House, Mail, SquareKanban, UserRound, type LucideIcon } from "lucide-react";
+import {
+  Bug,
+  FileSearch,
+  House,
+  Mail,
+  SquareKanban,
+  UserRound,
+  type LucideIcon,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -13,7 +21,12 @@ type NavItem = {
 export const navItems: NavItem[] = [
   { to: "/", label: "Inicio", short: "Inicio", icon: House },
   { to: "/qa", label: "QA & Testing", short: "QA", icon: Bug },
-  { to: "/project-management", label: "Gestión de proyectos", short: "Gestión", icon: SquareKanban },
+  {
+    to: "/project-management",
+    label: "Gestión de proyectos",
+    short: "Gestión",
+    icon: SquareKanban,
+  },
   { to: "/analisis-funcional", label: "Análisis Funcional", short: "Análisis", icon: FileSearch },
   { to: "/sobre-mi", label: "Sobre mí", short: "Sobre mí", icon: UserRound },
   { to: "/contacto", label: "Contacto", short: "Contacto", icon: Mail },

@@ -1,5 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BookOpen, GraduationCap, HeartHandshake, Megaphone, Search, Sparkles, Target } from "lucide-react";
+import {
+  BookOpen,
+  GraduationCap,
+  HeartHandshake,
+  Megaphone,
+  Search,
+  Sparkles,
+  Target,
+} from "lucide-react";
 
 import { GlassCard, PageHeader, SectionTitle } from "@/components/portfolio/ui";
 import { profile } from "@/data/portfolio";
@@ -144,8 +152,9 @@ function AboutPage() {
           <SectionTitle>Aprendizaje continuo</SectionTitle>
           <GlassCard className="h-[calc(100%-3.5rem)]">
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Cada proyecto de este portafolio es práctica aplicada: sumo herramientas nuevas —como agentes de IA
-              y self-healing locators— sin perder el criterio humano sobre qué y cómo probar.
+              Cada proyecto de este portafolio es práctica aplicada: sumo herramientas nuevas —como
+              agentes de IA y self-healing locators— sin perder el criterio humano sobre qué y cómo
+              probar.
             </p>
             <div className="mt-4 flex flex-wrap gap-1.5">
               {tools.map((t) => (

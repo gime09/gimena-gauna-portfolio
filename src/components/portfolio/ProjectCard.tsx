@@ -63,14 +63,22 @@ export function ProjectCard({ project }: { project: Project }) {
           <dl
             className={cn(
               "mt-4 grid gap-2",
-              metrics.length === 1 ? "grid-cols-1" : metrics.length === 2 ? "grid-cols-2" : "grid-cols-3",
+              metrics.length === 1
+                ? "grid-cols-1"
+                : metrics.length === 2
+                  ? "grid-cols-2"
+                  : "grid-cols-3",
             )}
           >
             {metrics.map((m) => (
               <div key={m.label} className="min-w-0 rounded-xl bg-foreground/[0.05] px-3 py-2.5">
                 <dt className="sr-only">{m.label}</dt>
-                <dd className="truncate text-lg font-bold text-primary">{m.value}</dd>
-                <p className="text-[11px] leading-tight text-muted-foreground">{m.label}</p>
+                <dd>
+                  <span className="block truncate text-lg font-bold text-primary">{m.value}</span>
+                  <span className="block text-[11px] leading-tight text-muted-foreground">
+                    {m.label}
+                  </span>
+                </dd>
               </div>
             ))}
           </dl>
@@ -106,7 +114,9 @@ function ProjectDialogContent({ project }: { project: Project }) {
   return (
     <DialogContent className="max-h-[88vh] w-[calc(100%-1.5rem)] max-w-2xl overflow-y-auto rounded-3xl border-glass-border bg-popover/95 p-6 backdrop-blur-xl sm:rounded-3xl sm:p-8">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary">{project.group}</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+          {project.group}
+        </p>
         <DialogTitle className="mt-2 pr-6 text-2xl font-bold leading-tight sm:text-3xl">
           {project.title}
         </DialogTitle>
@@ -118,9 +128,15 @@ function ProjectDialogContent({ project }: { project: Project }) {
       {project.metrics && project.metrics.length > 0 && (
         <dl className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {project.metrics.map((m) => (
-            <div key={m.label} className="rounded-xl border border-glass-border bg-foreground/[0.04] p-3">
-              <dd className="text-xl font-bold text-primary">{m.value}</dd>
-              <dt className="text-xs text-muted-foreground">{m.label}</dt>
+            <div
+              key={m.label}
+              className="rounded-xl border border-glass-border bg-foreground/[0.04] p-3"
+            >
+              <dt className="sr-only">{m.label}</dt>
+              <dd>
+                <span className="block text-xl font-bold text-primary">{m.value}</span>
+                <span className="block text-xs text-muted-foreground">{m.label}</span>
+              </dd>
             </div>
           ))}
         </dl>
@@ -132,10 +148,15 @@ function ProjectDialogContent({ project }: { project: Project }) {
       <div className="space-y-5">
         {project.sections.map((s) => (
           <section key={s.title}>
-            <h4 className="mb-2 text-sm font-bold uppercase tracking-wider text-foreground/90">{s.title}</h4>
+            <h4 className="mb-2 text-sm font-bold uppercase tracking-wider text-foreground/90">
+              {s.title}
+            </h4>
             <ul className="space-y-2">
               {s.items.map((item) => (
-                <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground">
+                <li
+                  key={item}
+                  className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
+                >
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                   <span>{item}</span>
                 </li>
@@ -147,7 +168,10 @@ function ProjectDialogContent({ project }: { project: Project }) {
 
       <div className="flex flex-wrap gap-1.5">
         {project.tags.map((t) => (
-          <span key={t} className="rounded-full border border-glass-border px-2.5 py-1 text-xs text-foreground/80">
+          <span
+            key={t}
+            className="rounded-full border border-glass-border px-2.5 py-1 text-xs text-foreground/80"
+          >
             {t}
           </span>
         ))}
@@ -167,7 +191,15 @@ function ProjectDialogContent({ project }: { project: Project }) {
   );
 }
 
-export function ResultsBar({ passed, failed, blocked }: { passed: number; failed: number; blocked: number }) {
+export function ResultsBar({
+  passed,
+  failed,
+  blocked,
+}: {
+  passed: number;
+  failed: number;
+  blocked: number;
+}) {
   const total = passed + failed + blocked;
   const parts = [
     { label: "Aprobadas", value: passed, className: "bg-success" },
@@ -178,7 +210,11 @@ export function ResultsBar({ passed, failed, blocked }: { passed: number; failed
     <div>
       <div className="flex h-3 overflow-hidden rounded-full bg-foreground/10">
         {parts.map((p) => (
-          <div key={p.label} className={p.className} style={{ width: `${(p.value / total) * 100}%` }} />
+          <div
+            key={p.label}
+            className={p.className}
+            style={{ width: `${(p.value / total) * 100}%` }}
+          />
         ))}
       </div>
       <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
@@ -201,10 +237,16 @@ export function EffortBars() {
   return (
     <div className="space-y-2">
       {rows.map((r) => (
-        <div key={r.label} className="grid grid-cols-[88px_minmax(0,1fr)_56px] items-center gap-3 text-xs">
+        <div
+          key={r.label}
+          className="grid grid-cols-[88px_minmax(0,1fr)_56px] items-center gap-3 text-xs"
+        >
           <span className="text-muted-foreground">{r.label}</span>
           <div className="h-3 overflow-hidden rounded-full bg-foreground/10">
-            <div className={cn("h-full rounded-full", r.className)} style={{ width: `${(r.value / 912) * 100}%` }} />
+            <div
+              className={cn("h-full rounded-full", r.className)}
+              style={{ width: `${(r.value / 912) * 100}%` }}
+            />
           </div>
           <span className="text-right font-semibold">{r.value} HH</span>
         </div>

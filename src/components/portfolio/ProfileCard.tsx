@@ -1,10 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { Github, Linkedin, Mail, MessageCircle, Send } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
-import photo from "@/assets/gimena-gauna.png.asset.json";
 import { profile } from "@/data/portfolio";
 import { portraitOutline } from "@/data/portrait-outline";
 import { cn } from "@/lib/utils";
+
+// Foto local optimizada (574×752, WebP con transparencia).
+const PHOTO_URL = "/media/gimena-gauna.webp";
 
 export const socials = [
   { label: "GitHub", href: profile.github, icon: Github },
@@ -34,27 +37,46 @@ export function SocialLinks({ className }: { className?: string }) {
 }
 
 export function ProfileCard({ className }: { className?: string }) {
+  const [hasPhoto, setHasPhoto] = useState(true);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // La imagen puede fallar antes de la hidratación; el onError solo no alcanza.
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img && img.complete && img.naturalWidth === 0) setHasPhoto(false);
+  }, []);
+
   return (
     <div className={cn("rounded-3xl glass p-4 text-center", className)}>
       <div
         className="relative mx-auto aspect-square max-w-sm overflow-hidden rounded-2xl lg:max-w-none"
         style={{ background: "var(--gradient-photo)" }}
       >
-        <img
-          src={photo.url}
-          alt="Retrato de Gimena Gauna"
-          className="portrait-layer"
-          width={574}
-          height={752}
-        />
-        <svg
-          viewBox="0 0 574 752"
-          className="portrait-layer pointer-events-none"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path d={portraitOutline} pathLength={1000} className="figure-trace" />
-        </svg>
+        {hasPhoto ? (
+          <img
+            ref={imgRef}
+            src={PHOTO_URL}
+            alt="Retrato de Gimena Gauna"
+            className="portrait-layer"
+            width={574}
+            height={752}
+            onError={() => setHasPhoto(false)}
+          />
+        ) : (
+          <div className="portrait-layer grid place-items-center" aria-hidden="true">
+            <span className="font-serif text-7xl italic text-white/80">GG</span>
+          </div>
+        )}
+        {hasPhoto && (
+          <svg
+            viewBox="0 0 574 752"
+            className="portrait-layer pointer-events-none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d={portraitOutline} pathLength={1000} className="figure-trace" />
+          </svg>
+        )}
       </div>
       <h2 className="mt-5 text-2xl font-bold tracking-tight">{profile.name}</h2>
       <p className="mx-auto mt-2 max-w-xs text-[13px] font-medium leading-relaxed text-primary">

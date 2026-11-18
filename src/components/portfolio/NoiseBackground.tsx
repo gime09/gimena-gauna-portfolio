@@ -1,6 +1,9 @@
 export function NoiseBackground() {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background">
+    <div
+      aria-hidden
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background"
+    >
       <div
         className="noise-orb h-[34rem] w-[34rem] opacity-20"
         style={{ top: "-12rem", left: "-10rem", background: "var(--orb-violet)" }}

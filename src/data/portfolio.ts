@@ -13,6 +13,7 @@ export type Project = {
   sections: { title: string; items: string[] }[];
   repo?: string;
   step?: number;
+  featured?: boolean;
 };
 
 export const profile = {
@@ -32,6 +33,7 @@ export const areas: {
   id: AreaId;
   to: "/qa" | "/project-management" | "/analisis-funcional";
   label: string;
+  short: string;
   tagline: string;
   description: string;
 }[] = [
@@ -39,6 +41,7 @@ export const areas: {
     id: "qa",
     to: "/qa",
     label: "QA & Testing",
+    short: "QA",
     tagline: "Manual, APIs, automatización e IA",
     description:
       "Diseño de casos, pruebas de servicios SOAP/REST, rendimiento, automatización con Selenium y un ciclo STLC completo con agentes de IA.",
@@ -47,6 +50,7 @@ export const areas: {
     id: "pm",
     to: "/project-management",
     label: "Gestión de proyectos",
+    short: "Gestión",
     tagline: "Portal de Autogestión de Turnos Médicos",
     description:
       "Caso integral de punta a punta: acta de constitución, kick off, Gantt, horas hombre, riesgos, desvíos y cierre.",
@@ -55,6 +59,7 @@ export const areas: {
     id: "fa",
     to: "/analisis-funcional",
     label: "Análisis Funcional",
+    short: "Análisis",
     tagline: "Relevamiento e ingeniería de requerimientos",
     description:
       "Relevamiento de sistema para el portal de turnos e ingeniería de requerimientos completa para MoneyMate App.",
@@ -66,6 +71,7 @@ export const projects: Project[] = [
   {
     id: "qa-demoblaze",
     area: "qa",
+    featured: true,
     group: "QA Manual",
     title: "Casos de prueba sobre DemoBlaze",
     summary:
@@ -104,6 +110,7 @@ export const projects: Project[] = [
   {
     id: "qa-soapui",
     area: "qa",
+    featured: true,
     group: "QA de Servicios Web (APIs)",
     title: "SoapUI · Pruebas funcionales SOAP",
     summary:
@@ -116,10 +123,7 @@ export const projects: Project[] = [
     sections: [
       {
         title: "AddInteger",
-        items: [
-          "Casos positivo y negativo.",
-          "Validación de SLA y de códigos HTTP 200 y 400.",
-        ],
+        items: ["Casos positivo y negativo.", "Validación de SLA y de códigos HTTP 200 y 400."],
       },
       {
         title: "CountryInfo · FullCountryInfo",
@@ -234,6 +238,7 @@ export const projects: Project[] = [
   {
     id: "qa-selenium",
     area: "qa",
+    featured: true,
     group: "QA Automatizado",
     title: "Automatización con Selenium WebDriver",
     summary:
@@ -272,6 +277,7 @@ export const projects: Project[] = [
   {
     id: "qa-ai-agents",
     area: "qa",
+    featured: true,
     group: "QA con Agentes de IA",
     title: "STLC completo con agentes de IA",
     summary:
@@ -367,11 +373,7 @@ export const projects: Project[] = [
     sections: [
       {
         title: "Fases",
-        items: [
-          "Análisis y Diseño.",
-          "Construcción e Implementación.",
-          "Producción.",
-        ],
+        items: ["Análisis y Diseño.", "Construcción e Implementación.", "Producción."],
       },
     ],
   },
@@ -564,6 +566,13 @@ export const projects: Project[] = [
 
 export function projectsByArea(area: AreaId) {
   return projects.filter((p) => p.area === area);
+}
+
+/** Los 4 proyectos que mejor resumen el área (o los primeros si no hay destacados). */
+export function featuredByArea(area: AreaId, limit = 4) {
+  const list = projectsByArea(area);
+  const highlighted = list.filter((p) => p.featured);
+  return (highlighted.length > 0 ? highlighted : list).slice(0, limit);
 }
 
 export function groupProjects(list: Project[]) {
