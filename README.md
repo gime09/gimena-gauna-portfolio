@@ -29,16 +29,17 @@ npm run format  # formatear todo el repo
 
 ## Dónde está cada cosa
 
-| Qué | Archivo |
-| --- | --- |
-| Perfil, áreas, proyectos y métricas | `src/data/portfolio.ts` |
-| Descargas de CV (rutas y nombres) | `src/data/cvs.ts` |
-| Shell: nav, perfil, footer, 404 y error | `src/routes/__root.tsx` |
-| Páginas: inicio, áreas, sobre mí, contacto | `src/routes/*.tsx` |
-| Foto y PDFs | `public/media/` |
-| Estilos y variables de color | `src/styles.css` |
+| Qué                                        | Archivo                                     |
+| ------------------------------------------ | ------------------------------------------- |
+| Perfil, áreas, proyectos y métricas        | `src/data/portfolio.ts`                     |
+| Descargas de CV (rutas y nombres)          | `src/data/cvs.ts`                           |
+| Galería, lightbox y descargas de adjuntos  | `src/components/portfolio/ProjectMedia.tsx` |
+| Shell: nav, perfil, footer, 404 y error    | `src/routes/__root.tsx`                     |
+| Páginas: inicio, áreas, sobre mí, contacto | `src/routes/*.tsx`                          |
+| Foto, CV y adjuntos de proyectos           | `public/media/`                             |
+| Estilos y variables de color               | `src/styles.css`                            |
 
-Todo el contenido vive en `src/data/portfolio.ts`; las páginas solo lo renderizan. Para agregar un proyecto alcanza con sumar un objeto a `projects` (con `featured: true` aparece en la home).
+Todo el contenido vive en `src/data/portfolio.ts`; las páginas solo lo renderizan. Para agregar un proyecto alcanza con sumar un objeto a `projects` (con `featured: true` aparece en la home). Los adjuntos se declaran en `images` y `files` del mismo objeto; `src/test/media.test.ts` falla si una ruta no existe o si falta el texto alternativo.
 
 ## Assets
 
@@ -50,6 +51,13 @@ En `public/media/`:
 - `cv-gimena-gauna-pmo.pdf`
 - `cv-gimena-gauna-analista-funcional.pdf`
 
+En `public/media/projects/<project-id>/` están los adjuntos de cada proyecto, con la misma estructura que sus ids:
+
+- `images/` — capturas WebP o JPG que se muestran en la galería del detalle
+- `files/` — planillas, documentos, presentaciones y XML descargables
+
+Los nombres son ASCII y en minúsculas para evitar problemas de encoding al publicar. Los `.docx`, `.xlsx` y `.pptx` no se previsualizan: se ofrecen como descarga con formato y tamaño.
+
 Para reemplazar un CV, pisá el archivo manteniendo el nombre. La foto debe conservar la proporción 574×752 porque el delineado animado (`src/data/portrait-outline.ts`) se extrajo de esa geometría.
 
 ## Publicar en Vercel
@@ -58,7 +66,7 @@ El proyecto ya está preparado: `vercel.json` define el build y Nitro detecta Ve
 
 1. Entrá a [vercel.com](https://vercel.com), iniciá sesión con GitHub.
 2. **Add New → Project** e importá `gime09/gimena-gauna-portfolio`.
-3. En *Production Branch* elegí la rama que quieras publicar (`main` o `Andromeda`).
+3. En _Production Branch_ elegí la rama que quieras publicar (`main` o `Andromeda`).
 4. Dejá el resto por defecto y presioná **Deploy**.
 
 Vercel corre `npm run build` y toma la salida `.vercel/output` (Build Output API), que incluye la función SSR y los estáticos. Cada push a la rama elegida redeploya automáticamente.

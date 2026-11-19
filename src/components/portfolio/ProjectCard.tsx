@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check, Github } from "lucide-react";
+import { ArrowUpRight, Check, Github, Paperclip } from "lucide-react";
 
 import {
   Dialog,
@@ -10,6 +10,7 @@ import {
 import type { Project } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
+import { ProjectFiles, ProjectGallery } from "./ProjectMedia";
 import { trackSpotlight } from "./ui";
 
 function RepoLink({ href, className }: { href: string; className?: string }) {
@@ -31,6 +32,14 @@ function RepoLink({ href, className }: { href: string; className?: string }) {
 
 export function ProjectCard({ project }: { project: Project }) {
   const metrics = project.metrics?.slice(0, 3) ?? [];
+  const imageCount = project.images?.length ?? 0;
+  const fileCount = project.files?.length ?? 0;
+  const mediaSummary = [
+    imageCount > 0 ? `${imageCount} ${imageCount === 1 ? "captura" : "capturas"}` : null,
+    fileCount > 0 ? `${fileCount} ${fileCount === 1 ? "archivo" : "archivos"}` : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <Dialog>
@@ -94,6 +103,13 @@ export function ProjectCard({ project }: { project: Project }) {
             </span>
           ))}
         </div>
+
+        {mediaSummary && (
+          <p className="mt-2 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+            <Paperclip className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+            <span>{mediaSummary}</span>
+          </p>
+        )}
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <DialogTrigger asChild>
@@ -165,6 +181,27 @@ function ProjectDialogContent({ project }: { project: Project }) {
           </section>
         ))}
       </div>
+
+      {((project.images?.length ?? 0) > 0 || (project.files?.length ?? 0) > 0) && (
+        <div className="min-w-0 space-y-5 border-t border-glass-border pt-5">
+          {project.images && project.images.length > 0 && (
+            <section>
+              <h4 className="mb-2 text-sm font-bold uppercase tracking-wider text-foreground/90">
+                Capturas
+              </h4>
+              <ProjectGallery images={project.images} title={project.title} />
+            </section>
+          )}
+          {project.files && project.files.length > 0 && (
+            <section>
+              <h4 className="mb-2 text-sm font-bold uppercase tracking-wider text-foreground/90">
+                Archivos
+              </h4>
+              <ProjectFiles files={project.files} />
+            </section>
+          )}
+        </div>
+      )}
 
       <div className="flex flex-wrap gap-1.5">
         {project.tags.map((t) => (
