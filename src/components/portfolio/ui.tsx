@@ -70,7 +70,7 @@ export function AreaSwitcher({ current }: { current: AreaId }) {
   return (
     <nav
       aria-label="Áreas del portafolio"
-      className="inline-flex w-full gap-1 overflow-x-auto rounded-full glass p-1 sm:w-auto"
+      className="inline-flex w-full gap-0.5 overflow-x-auto overflow-y-hidden rounded-full glass p-1 scrollbar-none sm:w-auto sm:gap-1"
     >
       {areas.map((a) => (
         <Link

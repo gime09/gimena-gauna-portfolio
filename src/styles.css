@@ -161,6 +161,49 @@
     outline: 2px solid var(--primary);
     outline-offset: 3px;
   }
+
+  /* Scrollbars: Windows muestra las nativas en gris claro y rompen el dark theme. */
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--primary) 45%, transparent);
+    border-radius: 999px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklab, var(--primary) 70%, transparent);
+  }
+
+  *::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* Firefox no entiende los pseudo-elementos de WebKit. */
+  @supports not selector(::-webkit-scrollbar) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: color-mix(in oklab, var(--primary) 50%, transparent) transparent;
+    }
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @utility glass {
