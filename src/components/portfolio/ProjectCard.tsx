@@ -45,7 +45,7 @@ export function ProjectCard({ project }: { project: Project }) {
     <Dialog>
       <article
         onMouseMove={trackSpotlight}
-        className="spotlight group flex h-full flex-col rounded-2xl glass p-5 sm:p-6"
+        className="spotlight group @container flex h-full flex-col rounded-2xl glass p-5 sm:p-6"
       >
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
@@ -76,20 +76,31 @@ export function ProjectCard({ project }: { project: Project }) {
                 ? "grid-cols-1"
                 : metrics.length === 2
                   ? "grid-cols-2"
-                  : "grid-cols-3",
+                  : "grid-cols-2 @min-[22rem]:grid-cols-3",
             )}
           >
-            {metrics.map((m) => (
-              <div key={m.label} className="min-w-0 rounded-xl bg-foreground/[0.05] px-3 py-2.5">
-                <dt className="sr-only">{m.label}</dt>
-                <dd>
-                  <span className="block truncate text-lg font-bold text-primary">{m.value}</span>
-                  <span className="block text-[11px] leading-tight text-muted-foreground">
-                    {m.label}
-                  </span>
-                </dd>
-              </div>
-            ))}
+            {metrics.map((m, index) => {
+              const spansMobileRow = metrics.length === 3 && index === 2;
+              return (
+                <div
+                  key={m.label}
+                  className={cn(
+                    "min-w-0 rounded-xl bg-foreground/[0.05] px-2.5 py-2.5 sm:px-3",
+                    spansMobileRow && "col-span-2 @min-[22rem]:col-span-1",
+                  )}
+                >
+                  <dt className="sr-only">{m.label}</dt>
+                  <dd>
+                    <span className="block truncate text-base font-bold text-primary sm:text-lg">
+                      {m.value}
+                    </span>
+                    <span className="block text-pretty text-[11px] leading-snug text-muted-foreground">
+                      {m.label}
+                    </span>
+                  </dd>
+                </div>
+              );
+            })}
           </dl>
         )}
 
@@ -168,15 +179,29 @@ function ProjectDialogContent({ project }: { project: Project }) {
               {s.title}
             </h4>
             <ul className="space-y-2">
-              {s.items.map((item) => (
-                <li
-                  key={item}
-                  className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
-                >
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <span>{item}</span>
-                </li>
-              ))}
+              {s.items.map((item) => {
+                const isLink = typeof item !== "string";
+                return (
+                  <li
+                    key={isLink ? item.text : item}
+                    className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
+                  >
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    {isLink ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline decoration-primary/50 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                      >
+                        {item.text}
+                      </a>
+                    ) : (
+                      <span>{item}</span>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </section>
         ))}
@@ -222,6 +247,16 @@ function ProjectDialogContent({ project }: { project: Project }) {
           className="inline-flex w-fit items-center gap-2 rounded-full btn-iridescent px-5 py-2.5 text-sm font-bold text-brand-foreground"
         >
           <Github className="h-4 w-4" /> Abrir repositorio
+        </a>
+      )}
+      {project.siteUrl && (
+        <a
+          href={project.siteUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex w-fit items-center gap-2 rounded-full border border-glass-border px-5 py-2.5 text-sm font-bold text-foreground transition-colors hover:border-primary hover:text-primary"
+        >
+          <ArrowUpRight className="h-4 w-4" /> {project.siteLabel ?? "Abrir sitio de prueba"}
         </a>
       )}
     </DialogContent>

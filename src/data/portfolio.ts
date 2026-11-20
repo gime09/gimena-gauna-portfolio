@@ -16,6 +16,8 @@ export type ProjectFile = {
   note?: string;
 };
 
+export type ProjectSectionItem = string | { text: string; href: string };
+
 export type Project = {
   id: string;
   area: AreaId;
@@ -24,10 +26,12 @@ export type Project = {
   summary: string;
   tags: string[];
   metrics?: Metric[];
-  sections: { title: string; items: string[] }[];
+  sections: { title: string; items: ProjectSectionItem[] }[];
   images?: ProjectImage[];
   files?: ProjectFile[];
   repo?: string;
+  siteUrl?: string;
+  siteLabel?: string;
   step?: number;
   featured?: boolean;
 };
@@ -90,6 +94,7 @@ export const projects: Project[] = [
     featured: true,
     group: "QA Manual",
     title: "Casos de prueba sobre DemoBlaze",
+    siteUrl: "https://www.demoblaze.com/",
     summary:
       "Análisis y diseño de casos de prueba para un e-commerce: requisitos, precondiciones, pasos y resultados esperados.",
     tags: ["Diseño de casos", "Funcional", "E-commerce"],
@@ -120,15 +125,34 @@ export const projects: Project[] = [
     title: "Caja negra con tablas de decisión",
     summary:
       "Pruebas de caja negra sobre pagos con tarjeta, bonos, descuentos y calentamiento de sistemas, con tablas de decisión y particiones de equivalencia.",
-    tags: ["Caja negra", "Tablas de decisión", "Particiones", "Calentamiento"],
+    tags: ["Caja negra", "Tablas de decisión", "Particiones"],
     sections: [
       {
-        title: "Qué hice",
+        title: "Caso 1 · Pago con tarjeta",
         items: [
-          "Modelé las combinaciones de condiciones de pago (tarjeta, bonos, descuentos) y de calentamiento de sistemas en tablas de decisión.",
-          "Derivé casos de prueba que cubren cada regla de negocio.",
-          "Complementé con particiones de equivalencia para los rangos de antigüedad del bono.",
-          "Detecté combinaciones límite que suelen quedar fuera de las pruebas intuitivas.",
+          "Determina el descuento sobre el importe a facturar según el tipo de tarjeta: oro (15%) o club (5%). La modalidad joven suma un 5% adicional, acumulable.",
+          "Valida que no se combinen tarjetas oro y club en una misma factura.",
+        ],
+      },
+      {
+        title: "Caso 2 · Bono de trabajo",
+        items: [
+          "Calcula el bono salarial según la antigüedad: 1,5% del sueldo por año trabajado para menos de 5 años; 2% entre 5 y 15 años; y 3% para más de 15 años.",
+          "Aplica un tope del 30% del sueldo neto mensual.",
+        ],
+      },
+      {
+        title: "Caso 3 · Descuento para clientes",
+        items: [
+          "Aplica un 15% de descuento en la primera compra de clientes recién registrados, o un 20% si usan un cupón electrónico distribuido por la empresa.",
+          "Valida que los descuentos no se acumulen entre sí.",
+        ],
+      },
+      {
+        title: "Caso 4 · Calentamiento",
+        items: [
+          "Monitorea el calentamiento de la línea y del motor de un ordenador de control.",
+          "El calentamiento de cualquiera de los dos activa un mensaje de alarma en pantalla; si se calienta el motor, también se activa una sirena sonora.",
         ],
       },
     ],
@@ -196,15 +220,22 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: "AddInteger",
-        items: ["Casos positivo y negativo.", "Validación de SLA y de códigos HTTP 200 y 400."],
+        title: "AddInteger · Descripción del proyecto",
+        items: [
+          "Testing funcional de un servicio SOAP mediante SoapUI, usando un WSDL de ejemplo y la operación AddInteger para sumar dos números.",
+          "La Test Suite incluye tres casos: Suma - Positivo (números válidos), Suma - Negativo (letras) y Suma - Negativo (símbolos).",
+          "Cada caso valida el SLA de la respuesta, los códigos de estado HTTP y la respuesta SOAP.",
+          "Se comprueba la suma correcta con valores válidos (HTTP 200) y el rechazo de letras y símbolos con el código de error esperado (HTTP 400).",
+        ],
       },
       {
-        title: "CountryInfo · FullCountryInfo",
+        title: "CountryInfo · FullCountryInfo · Descripción del proyecto",
         items: [
-          'Código ISO válido "AR".',
-          'Código inexistente "ZY".',
-          "XML malformado, con verificación del manejo de errores.",
+          "Testing funcional del servicio SOAP público CountryInfo, operación FullCountryInfo, que consulta información de un país a partir de su código ISO.",
+          'CP01 - Valor código válido: "AR" → HTTP 200; la respuesta contiene "Argentina" y no contiene "Error".',
+          'CP02 - Código no existente: "ZY" → HTTP 200; la respuesta informa "not found" sin que falle el servicio.',
+          'CP03 - Request incompleto: envío de XML malformado o incompleto → HTTP 500; la respuesta contiene "error".',
+          "Cada caso valida también el cumplimiento de esquema (Schema Compliance) y el tiempo de respuesta (SLA). La cobertura incluye valor válido, valor inválido manejado con gracia e ingreso malformado.",
         ],
       },
     ],
@@ -244,19 +275,25 @@ export const projects: Project[] = [
       {
         title: "Ejecución",
         items: [
-          "Spike test desde el Runner de Postman con 100 VU contra date.nager.at.",
-          "1.092 requests enviados con un throughput de 15,85 req/s.",
+          "Prueba de rendimiento sobre el servicio REST público de feriados y long weekends date.nager.at, usando Postman.",
+          "Configuré el endpoint GET /api/v3/LongWeekend/2024/AR y ejecuté una prueba de carga tipo Spike desde el Runner de Postman: 100 usuarios virtuales durante 1 minuto.",
+          "Se enviaron 1.092 requests, con un throughput de 15,85 req/s, un tiempo de respuesta promedio de 20 ms y 0% de error.",
         ],
       },
       {
         title: "Análisis",
         items: [
-          "Tiempo de respuesta promedio de 20 ms y 0% de error.",
-          "Lectura de percentiles 90th, 95th y 99th para ver el comportamiento en los picos.",
+          "Analicé los percentiles: 90th de 25 ms, 95th de 44 ms, 99th de 125 ms y máximo de 279 ms, para detectar picos de latencia que el promedio no refleja.",
+          "El pico de latencia coincidió con el momento de mayor concurrencia de usuarios virtuales, en línea con el perfil de carga Spike, que incrementa progresivamente hasta alcanzar un tope.",
         ],
       },
     ],
     images: [
+      {
+        src: "/media/projects/qa-postman-performance/images/postman-longweekend-request-response.jpg",
+        alt: "Postman con la solicitud GET al endpoint LongWeekend para 2024 y AR y respuesta JSON 200 OK, evidencia de que el endpoint está configurado y funcionando.",
+        caption: "Postman · request y response de LongWeekend",
+      },
       {
         src: "/media/projects/qa-postman-performance/images/resumen-100-vu.jpg",
         alt: "Resumen del spike test: 100 usuarios virtuales durante un minuto, 1.092 requests, 15,85 requests por segundo, 20 ms de tiempo promedio y 0% de error.",
@@ -285,21 +322,20 @@ export const projects: Project[] = [
     group: "QA de Servicios Web (APIs)",
     title: "Postman · Funcional REST",
     summary:
-      "Creación y registro de usuarios en reqres.in: alcance funcional vs rendimiento y validaciones 200, 201 y 400.",
+      "Testing funcional de un servicio REST con Postman: creación de usuarios mediante POST a reqres.in/api/users.",
     tags: ["Postman", "REST", "reqres.in"],
     metrics: [
-      { value: "200", label: "OK" },
       { value: "201", label: "Created" },
       { value: "400", label: "Bad Request" },
     ],
     sections: [
       {
-        title: "Qué hice",
+        title: "Descripción del proyecto",
         items: [
-          "Definí el alcance: pruebas funcionales separadas de las de rendimiento.",
-          "Casos de prueba con body y sin body.",
-          "Validé respuestas 201 Created frente a 400 Bad Request.",
-          "Registré usuarios en /api/register con validaciones de status, body y tiempo de respuesta.",
+          "Evalué el contexto del servicio y prioricé las pruebas funcionales por tratarse de una funcionalidad nueva. Dejé rendimiento y seguridad fuera del alcance porque es un sistema interno con pocos usuarios: una decisión consciente sobre dónde enfocar el esfuerzo de testing.",
+          "Identifiqué casos para datos válidos de nombre y rol, nombre vacío, rol vacío, rol inválido, nombre con caracteres no permitidos y request sin body.",
+          'Con datos válidos (name: "Norma Perez", job: "Lider"), el servicio respondió 201 Created e incluyó un id y un createdAt generados.',
+          "Al enviar el request sin body, el servicio respondió 400 Bad Request.",
         ],
       },
     ],
@@ -314,16 +350,6 @@ export const projects: Project[] = [
         alt: "POST a reqres.in con el body vacío: respuesta 400 Bad Request en 459 ms.",
         caption: "Sin body · 400",
       },
-      {
-        src: "/media/projects/qa-postman-rest/images/endpoint-validaciones.jpg",
-        alt: "POST al endpoint de registro de reqres.in con email y contraseña: respuesta 200 OK y tres validaciones aprobadas.",
-        caption: "Registro · 200 OK",
-      },
-      {
-        src: "/media/projects/qa-postman-rest/images/ejecucion-test-results.jpg",
-        alt: "Pestaña Test Results de Postman con las validaciones de status, body y tiempo de respuesta aprobadas.",
-        caption: "Test Results · 3 de 3",
-      },
     ],
   },
   {
@@ -331,7 +357,8 @@ export const projects: Project[] = [
     area: "qa",
     group: "QA de Servicios Web (APIs)",
     title: "Postman · Data-Driven Testing",
-    summary: "Runner con archivo CSV sobre la API LongWeekend y scripts post-respuesta.",
+    summary:
+      "Automatización de pruebas del endpoint LongWeekend de Nager.Date API con el Runner de Postman y datos parametrizados desde CSV.",
     tags: ["Postman", "CSV", "Data-driven"],
     metrics: [
       { value: "5", label: "Iteraciones" },
@@ -339,11 +366,12 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: "Qué hice",
+        title: "Descripción del proyecto",
         items: [
-          "Parametricé las solicitudes con un archivo CSV.",
-          "Scripts post-respuesta que validan status, body y SLA.",
-          "5 iteraciones con 15 validaciones aprobadas.",
+          "Automaticé pruebas del endpoint LongWeekend (Nager.Date API) con el Runner de Postman y un dataset CSV parametrizado.",
+          'En cada iteración, los scripts post-respuesta validan el código HTTP 200, que el body contenga "startDate" y un tiempo de respuesta menor a 500 ms.',
+          'El CSV combina casos válidos (año 2024 con Argentina, Colombia y Estados Unidos) y casos edge o inválidos (año "ABCD" y código de país "99") para observar su comportamiento en una misma corrida.',
+          "Resultado: 5 iteraciones y 15 validaciones (3 por iteración), con 15 aprobadas y 0 fallidas; tiempo de respuesta promedio de 20 ms.",
         ],
       },
     ],
@@ -352,11 +380,6 @@ export const projects: Project[] = [
         src: "/media/projects/qa-postman-ddt/images/endpoint-configurado.jpg",
         alt: "Petición GET a LongWeekend en Postman con los parámetros year 2024 y countryCode AR, y respuesta 200 OK.",
         caption: "Endpoint LongWeekend",
-      },
-      {
-        src: "/media/projects/qa-postman-ddt/images/request-response.jpg",
-        alt: "Respuesta de LongWeekEnd para 2024 y AR con 200 OK en 1.031 ms y el JSON de feriados.",
-        caption: "Request y response",
       },
       {
         src: "/media/projects/qa-postman-ddt/images/archivo-csv.jpg",
@@ -391,7 +414,9 @@ export const projects: Project[] = [
     group: "QA de Servicios Web (APIs)",
     title: "Newman CLI · Reporte htmlextra",
     summary:
-      "Reporte HTML interactivo sobre el registro en reqres.in, con diagnóstico real de una falla de tiempo de respuesta.",
+      "Generación de un reporte HTML de ejecución con Newman sobre POST https://reqres.in/api/register, con análisis de una falla real de SLA.",
+    siteUrl: "https://reqres.in/api/register",
+    siteLabel: "Abrir endpoint reqres.in/api/register",
     tags: ["Newman", "CLI", "htmlextra"],
     metrics: [
       { value: "564 ms", label: "Respuesta medida" },
@@ -399,15 +424,27 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: "Qué hice",
+        title: "Flujo y resultados",
         items: [
-          "Ejecuté la colección por línea de comandos con Newman.",
-          "Generé un reporte HTML interactivo con htmlextra.",
-          "Diagnostiqué una falla real: la respuesta tardó 564 ms frente a un umbral de 500 ms.",
+          "Configuré en Postman una colección para el registro de usuario en POST https://reqres.in/api/register, con validaciones post-respuesta de status 200, contenido del body y tiempo de respuesta menor a 500 ms.",
+          "Exporté la colección a JSON y la ejecuté por línea de comandos con Newman y el reporter htmlextra para generar un reporte HTML interactivo.",
+          'Comando utilizado: newman run PI4.postman_collection.json -r htmlextra --reporter-htmlextra-title "Reporte Postman-Newman".',
+          "Resultado real: pasaron 2 de 3 aserciones (status 200 y contenido del body). La validación de tiempo falló: la respuesta tardó 564 ms, por encima del umbral de 500 ms.",
+          "El 67% de las pruebas pasó en esa corrida; el reporte permitió identificar y diagnosticar la falla de rendimiento.",
         ],
       },
     ],
     images: [
+      {
+        src: "/media/projects/qa-newman/images/postman-registro-endpoint-scripts.jpg",
+        alt: "Postman con el endpoint POST de registro en reqres.in configurado, body de la solicitud y pestaña Scripts con validaciones.",
+        caption: "Endpoint configurado + validaciones (Scripts)",
+      },
+      {
+        src: "/media/projects/qa-newman/images/postman-registro-test-results.jpg",
+        alt: "Ejecución en Postman del request de registro con tres validaciones aprobadas: código 200, body y tiempo de respuesta.",
+        caption: "Ejecución en Postman (Test Results)",
+      },
       {
         src: "/media/projects/qa-newman/images/reporte-resumen.jpg",
         alt: "Resumen del reporte htmlextra: 1 iteración, 3 aserciones, 1 prueba fallida y 0 omitidas.",
@@ -446,9 +483,9 @@ export const projects: Project[] = [
     tags: ["Selenium", "Java", "TestNG", "Maven", "POM", "MySQL"],
     repo: "https://github.com/gime09/QA-Automation-Selenium",
     metrics: [
-      { value: "3", label: "Sitios automatizados" },
+      { value: "6", label: "Proyectos en el repo" },
+      { value: "5", label: "Sitios automatizados" },
       { value: "3", label: "Navegadores" },
-      { value: "11–23", label: "Versiones de Java" },
     ],
     sections: [
       {
@@ -461,6 +498,7 @@ export const projects: Project[] = [
       {
         title: "Cobertura",
         items: [
+          "6 proyectos en un mismo repositorio: SauceDemo, OrangeHRM, Automation Practice, Wikipedia y automationexercise.com.",
           "Cross-browser testing en Chrome, Firefox y Edge.",
           "Consultas JDBC a una base MySQL para obtener datos de prueba.",
         ],
@@ -483,7 +521,9 @@ export const projects: Project[] = [
     summary:
       "Agentes especializados con Claude Code + Playwright MCP sobre el e-commerce ToolShop, con enfoque human-in-the-loop.",
     tags: ["Claude Code", "Playwright MCP", "BDD", "Gherkin"],
-    repo: "https://github.com/gime09/ai-qa-testing",
+    repo: "https://github.com/gime09/qa-agentico/tree/main/ai-qa-testing-main",
+    siteUrl: "https://practicesoftwaretesting.com/",
+    siteLabel: "Abrir sitio bajo prueba · ToolShop",
     metrics: [
       { value: "117", label: "Pruebas ejecutadas" },
       { value: "94", label: "Aprobadas" },
@@ -498,7 +538,24 @@ export const projects: Project[] = [
         items: [
           "Ciclo STLC completo con agentes especializados por etapa.",
           "Claude Code + Playwright MCP sobre el e-commerce ToolShop.",
+          {
+            text: "Sistema bajo prueba: el sitio practicesoftwaretesting.com y su API REST documentada en api.practicesoftwaretesting.com/api/documentation.",
+            href: "https://api.practicesoftwaretesting.com/api/documentation",
+          },
           "Human-in-the-loop: cada salida de los agentes pasa por revisión humana.",
+        ],
+      },
+      {
+        title: "Framework de agentes",
+        items: [
+          "Analista de historias: análisis de requerimientos y detección de ambigüedades.",
+          "Estratega de pruebas: plan de pruebas y matriz de riesgos.",
+          "Generadores de casos (manuales, BDD y API): diseño de casos con cobertura de escenarios positivos, negativos y de borde.",
+          "Ejecutor E2E: automatización en navegador con Playwright MCP.",
+          "Ejecutor de API: corridas de colecciones Postman vía Newman.",
+          "Generador de reportes de bug: reportes estandarizados con severidad y evidencia.",
+          "Generador de informe de cierre: dashboard ejecutivo con recomendación Go/No-Go.",
+          "Regla central del framework: no inventar. Si a un agente le falta información, la marca y pregunta en vez de rellenar con una suposición disfrazada de hecho.",
         ],
       },
       {
@@ -508,6 +565,43 @@ export const projects: Project[] = [
           "41 ambigüedades detectadas en los requisitos.",
           "10 bug reports formalizados.",
           "Dashboard de cierre con decisión Go/No-Go.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "qa-playwright-ia",
+    area: "qa",
+    group: "QA con Agentes de IA",
+    title: "Playwright + TypeScript · Suite E2E",
+    summary:
+      "Suite de pruebas E2E con Playwright y TypeScript sobre laboratoriodetesting.com: login, validación de formularios y carrito, con reportes HTML y CI.",
+    tags: ["Playwright", "TypeScript", "E2E", "GitHub Actions"],
+    repo: "https://github.com/gime09/qa-agentico/tree/main/playwright-ai-curso-master",
+    siteUrl: "https://www.laboratoriodetesting.com/",
+    siteLabel: "Abrir sitio bajo prueba",
+    metrics: [
+      { value: "2", label: "Flujos E2E" },
+      { value: "HTML", label: "Reportes y trazas" },
+      { value: "CI", label: "GitHub Actions" },
+    ],
+    sections: [
+      {
+        title: "Alcance",
+        items: [
+          "Automatización de extremo a extremo de los flujos críticos de la plataforma: inicio de sesión y gestión del carrito de compras.",
+          "Validación del formulario de login, incluidos casos de error y formatos de email.",
+          "Verificación del agregado de productos y de la gestión del carrito.",
+          "Historias de usuario, planes de prueba y reportes de negocio documentados en el repositorio.",
+        ],
+      },
+      {
+        title: "Infraestructura",
+        items: [
+          "Playwright con TypeScript sobre Node.js.",
+          "Reportes HTML y trazas para depuración de las corridas.",
+          "Workflow de GitHub Actions en cada push o pull request a main y master.",
+          "Datos y configuración reutilizables en fixtures.",
         ],
       },
     ],
@@ -525,11 +619,21 @@ export const projects: Project[] = [
     metrics: [{ value: "$8.500.000", label: "Presupuesto inicial" }],
     sections: [
       {
-        title: "Contenido",
+        title: "Estructura",
         items: [
-          "Presupuesto inicial de $8.500.000 con reserva de contingencia.",
-          "Objetivos y alcance del proyecto.",
-          "Interesados identificados y criterios de éxito.",
+          "Información del proyecto (datos y patrocinadores), propósito y justificación.",
+          "Descripción y entregables, junto con los requerimientos de alto nivel del sistema y del proyecto.",
+          "Objetivos organizados por alcance, cronograma, costo y calidad; premisas y restricciones.",
+          "Riesgos iniciales de alto nivel, cronograma de hitos principales, presupuesto inicial asignado y lista de interesados.",
+          "Requisitos de aprobación, criterios de cierre o cancelación, asignación del gerente de proyecto y niveles de autoridad.",
+          "Personal y recursos preasignados, y aprobaciones del acta.",
+        ],
+      },
+      {
+        title: "Presupuesto inicial asignado",
+        items: [
+          "Presupuesto base: $7.500.000 + reserva de contingencia aproximada del 12%: $1.000.000 = presupuesto total: $8.500.000.",
+          "La reserva de contingencia cubre los riesgos identificados en la sección de riesgos iniciales.",
         ],
       },
     ],
@@ -557,11 +661,14 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: "Contenido",
+        title: "Estructura",
         items: [
-          "12 diapositivas con agenda y modelo de gobierno.",
-          "Metodología ágil con sprints quincenales.",
-          "Cronograma de alto nivel.",
+          "Agenda, situación actual, objetivos y alcance del proyecto.",
+          "Interesados e interesadas y gobierno del proyecto: patrocinador, jefatura de programa, jefe de proyecto y proveedor.",
+          "Fases del proyecto: análisis y diseño, implementación y producción.",
+          "Metodología ágil con sprints quincenales y sus ceremonias.",
+          "Cronograma de alto nivel y riesgos iniciales.",
+          "Presentación de 12 diapositivas, coherente con la misma línea de tiempo y los roles del resto de la evidencia del proyecto.",
         ],
       },
     ],
@@ -615,11 +722,21 @@ export const projects: Project[] = [
     metrics: [{ value: "8", label: "Riesgos identificados" }],
     sections: [
       {
-        title: "Contenido",
+        title: "Estructura",
         items: [
-          "Matriz de probabilidad e impacto.",
-          "8 riesgos identificados, cada uno con su plan de respuesta.",
-          "Plan de monitoreo durante la ejecución.",
+          "Objetivo del plan y metodología de gestión: identificación, análisis cualitativo, priorización, respuesta y monitoreo.",
+          "Roles y responsabilidades, junto con la matriz de probabilidad e impacto.",
+          "Registro de 8 riesgos con categoría, exposición y estrategia de respuesta.",
+          "Plan de respuesta detallado para los riesgos de exposición alta.",
+          "Desglose de la reserva de contingencia de $1.000.000 (aproximadamente 12% del presupuesto), asignada según el nivel de exposición.",
+          "Esquema de monitoreo quincenal durante la ejecución.",
+        ],
+      },
+      {
+        title: "Trazabilidad",
+        items: [
+          "El riesgo de cambio de versión no comunicado en la librería de autenticación de terceros se materializó durante la ejecución.",
+          "El evento quedó registrado en el Informe de Programación Inicial vs Final y en el Acta de Cierre del Proyecto, conectando la planificación de riesgos con lo ocurrido realmente.",
         ],
       },
     ],
@@ -644,10 +761,17 @@ export const projects: Project[] = [
     metrics: [{ value: "6", label: "Roles del equipo" }],
     sections: [
       {
-        title: "Contenido",
+        title: "Estructura",
         items: [
-          "Registro semanal de horas por actividad.",
-          "Seguimiento por colaborador para los 6 roles del equipo.",
+          "Una hoja por integrante del equipo, con las columnas Fecha, Tipo de Hora (Normal/Extra), N.° de Horas, Perfil, Colaborador, Proyecto, Actividad realizada, Descripción y Verificador/Entregable.",
+          "Cada hoja incluye el total de horas calculado.",
+        ],
+      },
+      {
+        title: "Equipo y alcance",
+        items: [
+          "Equipo ficticio de 6 roles: Jefe de Proyecto Senior, Desarrolladora Frontend Senior, Desarrollador Backend Senior, Analista Funcional, DBA SQL Server Senior y Tester de Aplicaciones Senior.",
+          "El registro cubre las dos primeras semanas del proyecto: relevamiento, diseño de pantallas, configuración de ambientes y primeras historias de usuario.",
         ],
       },
     ],
@@ -677,12 +801,21 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: "Contenido",
+        title: "Formato del reporte",
         items: [
-          "Ficha de programa con estado, avance mensual y presupuesto ejecutado.",
-          "Seguimiento financiero de los 3 hitos de pago vinculados a entregables.",
-          "Logros del período, próximos pasos y 2 riesgos activos con su plan de respuesta.",
-          "Lecciones aprendidas y definición de los estados del proyecto.",
+          "Ficha de programa con objetivos, alcance y cronograma planificado frente al real.",
+          "Hitos de pago vinculados a entregables, logros del período y próximos pasos.",
+          "Riesgos activos con su plan de respuesta, problemas y lecciones aprendidas.",
+          "Anexo con las definiciones de estado del proyecto.",
+        ],
+      },
+      {
+        title: "Seguimiento del proyecto",
+        items: [
+          "Proyecto de 2 meses de duración, con un presupuesto de $8.500.000 distribuido en 3 hitos de pago: 30%, 40% y 30%.",
+          "Avance real frente al planificado por mes, con cálculo de la desviación.",
+          "Monitoreo de 2 riesgos activos: dependencia de datos maestros de terceros y necesidad de capacitación previa al lanzamiento.",
+          "Lección aprendida: definir tempranamente los datos maestros críticos para reducir riesgos y evitar impactos en la ejecución.",
         ],
       },
     ],
@@ -708,11 +841,17 @@ export const projects: Project[] = [
     metrics: [{ value: "20 días", label: "Desvío analizado" }],
     sections: [
       {
-        title: "Análisis",
+        title: "Propósito y hallazgo",
         items: [
-          "Desvío de 20 días frente a la programación inicial.",
-          "Causa: actualización no comunicada en una librería de autenticación externa.",
-          "Acciones correctivas implementadas.",
+          "Contrastar la programación inicial con la programación final o real y explicar los motivos de la diferencia de tiempo.",
+          "Dos tareas no planificadas causaron el desvío: actualización de la integración por un cambio de versión no comunicado en la librería de autenticación del sistema de pacientes (12 días) y repetición de las pruebas de integración afectadas (8 días).",
+          "El desplazamiento total fue de 20 días en el cierre del proyecto: del 31 de mayo al 20 de junio de 2024.",
+        ],
+      },
+      {
+        title: "Acción correctiva",
+        items: [
+          "Incorporar una validación temprana de versiones de dependencias externas al checklist de inicio de la fase de construcción, para prevenir el mismo problema en proyectos futuros.",
         ],
       },
     ],
@@ -737,16 +876,29 @@ export const projects: Project[] = [
     metrics: [
       { value: "800", label: "HH planificadas" },
       { value: "912", label: "HH reales" },
-      { value: "+14%", label: "Sobrecosto" },
+      { value: "+14%", label: "HH adicionales" },
       { value: "1.100", label: "HH fases futuras" },
     ],
     sections: [
       {
-        title: "Análisis",
+        title: "Dentro de alcance",
         items: [
-          "800 HH iniciales frente a 912 HH reales.",
-          "14% de sobrecosto atribuible a la contingencia técnica.",
-          "Roadmap de fases futuras estimado en 1.100 HH.",
+          "Módulos entregados: búsqueda y reserva de turnos, cancelación y reprogramación, integración con el sistema de pacientes, notificaciones y panel de administración.",
+          "La planificación inicial contempló 800 HH y la final 912 HH por rol. El incremento de 112 HH (14%) se explica por el cambio de versión de la librería de autenticación, documentado en el Informe de Programación Inicial vs Final.",
+          "Las HH adicionales consumieron $680.000 de la reserva de contingencia; quedaron $320.000 sin utilizar.",
+        ],
+      },
+      {
+        title: "Fuera de alcance",
+        items: [
+          "Roadmap de funcionalidades futuras: recordatorios por WhatsApp, encuestas de satisfacción, reprogramación automática, reportes de ocupación, ausencias y tiempos de espera, e integraciones con facturación y laboratorio.",
+          "Estas funcionalidades fueron estimadas en 1.100 HH, con una planificación de alto nivel de 130 días.",
+        ],
+      },
+      {
+        title: "Conclusión",
+        items: [
+          "Se recomienda incorporar un margen de contingencia de entre 10% y 15% en proyectos con integraciones a sistemas externos fuera del control directo del equipo.",
         ],
       },
     ],
