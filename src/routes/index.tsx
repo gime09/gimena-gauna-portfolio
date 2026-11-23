@@ -6,14 +6,7 @@ import { ProfileCard } from "@/components/portfolio/ProfileCard";
 import { ProjectCard } from "@/components/portfolio/ProjectCard";
 import { Eyebrow, GlassCard, SectionTitle, trackSpotlight } from "@/components/portfolio/ui";
 import { cvs } from "@/data/cvs";
-import {
-  areas,
-  featuredByArea,
-  profile,
-  projects,
-  projectsByArea,
-  type AreaId,
-} from "@/data/portfolio";
+import { areas, featuredByArea, profile, projectsByArea, type AreaId } from "@/data/portfolio";
 import { canonical, jsonLd, OG_IMAGE, pageMeta, SITE_NAME, SITE_URL } from "@/data/site";
 import { cn } from "@/lib/utils";
 
@@ -52,7 +45,6 @@ function Index() {
   const total = projectsByArea(area).length;
 
   const stats = [
-    { value: String(projects.length), label: "proyectos y entregables" },
     { value: String(areas.length), label: "áreas de especialidad" },
     { value: String(cvs.length), label: "CV, uno por perfil" },
   ];
@@ -102,7 +94,7 @@ function Index() {
         </div>
       </section>
 
-      <section aria-label="Resumen del portafolio" className="grid grid-cols-3 gap-2 sm:gap-3">
+      <section aria-label="Resumen del portafolio" className="grid grid-cols-2 gap-2 sm:gap-3">
         {stats.map((s) => (
           <GlassCard key={s.label} interactive className="px-3 py-3 sm:px-5 sm:py-4">
             <p className="text-2xl font-bold text-primary sm:text-3xl">{s.value}</p>
