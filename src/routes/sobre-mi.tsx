@@ -48,7 +48,7 @@ const journey = [
   },
   {
     icon: Target,
-    title: "Hoy",
+    title: "Perfil profesional",
     role: "QA · Gestión de proyectos · Análisis Funcional",
     text: "Participación en el ciclo completo: negocio, análisis, planificación y calidad.",
   },
