@@ -1456,12 +1456,39 @@ export const projects: Project[] = [
     tags: ["Entrevistas", "Casos de Uso", "Gherkin", "Planning Poker"],
     sections: [
       {
-        title: "Técnicas",
+        title: "Elicitación",
         items: [
-          "Simulación de entrevistas de elicitación.",
-          "Modelado comparado de Casos de Uso frente a Historias de Usuario.",
-          "Especificación BDD en Gherkin (Given / When / Then).",
-          "Estimación con Planning Poker (Fibonacci).",
+          "Selección y justificación de tres técnicas: entrevistas, encuestas y brainstorming.",
+          "Simulación de una entrevista a un usuario potencial, revisada y simplificada en necesidades clave.",
+        ],
+      },
+      {
+        title: "Análisis",
+        items: [
+          "Identificación de 10 Historias de Usuario candidatas; 5 fueron seleccionadas y desglosadas en características a nivel de interesados.",
+          "Modelado de una Historia de Usuario en formato de Caso de Uso: CU-07, con flujos alternativos.",
+          "Comparación entre Historias de Usuario y Casos de Uso, con conclusión sobre cuándo utilizar cada formato.",
+        ],
+      },
+      {
+        title: "Verificación por revisión",
+        items: [
+          "Definición y aplicación de 5 criterios de evaluación en un peer review simulado.",
+          "Revisión de un artefacto breve e incompleto, con devolución de observaciones tipo IA.",
+        ],
+      },
+      {
+        title: "Especificación",
+        items: [
+          "Comparación de dos formatos: SRS tradicional frente a criterios de aceptación en Gherkin.",
+          "Selección y aplicación del formato Gherkin con escenarios Given/When/Then sobre 2 de las Historias de Usuario.",
+        ],
+      },
+      {
+        title: "Estimación",
+        items: [
+          "Práctica de Planning Poker con escala de Fibonacci sobre las 5 Historias de Usuario seleccionadas.",
+          "Registro de las divergencias de estimación entre roles y conclusiones del ejercicio.",
         ],
       },
     ],
