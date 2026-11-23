@@ -1420,8 +1420,18 @@ export const projects: Project[] = [
       {
         title: "Estructura",
         items: [
-          "Épicas desglosadas en Historias de Usuario, Características y Tareas.",
-          "Tareas asignadas por rol: UX, Frontend, Backend, QA y Seguridad.",
+          "Desglose completo de la épica «Registro e ingreso de gastos con categorización».",
+          "Cuatro Historias de Usuario, con características y tareas distribuidas por rol: UX/UI, Frontend, Backend, QA y Seguridad.",
+          "Nueva épica propuesta: «Alertas y notificaciones de presupuesto», con su propio desglose y justificación de negocio.",
+        ],
+      },
+      {
+        title: "Revisión crítica",
+        items: [
+          "Criterios de aceptación faltantes.",
+          "Casos borde no cubiertos.",
+          "Dependencias no declaradas entre épicas.",
+          "Requisitos no funcionales ausentes.",
         ],
       },
     ],
