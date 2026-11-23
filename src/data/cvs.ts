@@ -17,14 +17,14 @@ export const cvs: CvFile[] = [
   },
   {
     id: "pm",
-    label: "Gestión de proyectos",
+    label: "Gestión de proyectos (PM)",
     description: "Gestión de proyectos, planificación, roadmap y metodologías ágiles.",
     url: "/media/cv-gimena-gauna-pm.pdf",
     filename: "CV_Gimena_Gauna_PM.pdf",
   },
   {
     id: "pmo",
-    label: "PMO",
+    label: "PMO · Gestión de proyectos",
     description: "Oficina de proyectos, seguimiento de portafolio y procesos.",
     url: "/media/cv-gimena-gauna-pmo.pdf",
     filename: "CV_Gimena_Gauna_PMO.pdf",
