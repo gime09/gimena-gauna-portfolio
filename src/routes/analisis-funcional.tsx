@@ -9,7 +9,7 @@ export const Route = createFileRoute("/analisis-funcional")({
     meta: pageMeta({
       title: "Análisis Funcional · Gimena Gauna",
       description:
-        "Relevamiento del Portal de Turnos Médicos e ingeniería de requerimientos completa para MoneyMate App.",
+        "Levantamiento del Portal de Turnos Médicos e ingeniería de requerimientos completa para MoneyMate App.",
       path: "/analisis-funcional",
     }),
     links: canonical("/analisis-funcional"),

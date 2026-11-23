@@ -32,7 +32,7 @@ export const cvs: CvFile[] = [
   {
     id: "fa",
     label: "Analista Funcional",
-    description: "Relevamiento de requerimientos, historias de usuario y documentación funcional.",
+    description: "Levantamiento de requerimientos, historias de usuario y documentación funcional.",
     url: "/media/cv-gimena-gauna-analista-funcional.pdf",
     filename: "CV_Gimena_Gauna_Analista_Funcional.pdf",
   },

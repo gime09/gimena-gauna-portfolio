@@ -82,9 +82,9 @@ export const areas: {
     to: "/analisis-funcional",
     label: "Análisis Funcional",
     short: "Análisis",
-    tagline: "Relevamiento e ingeniería de requerimientos",
+    tagline: "Levantamiento e ingeniería de requerimientos",
     description:
-      "Relevamiento de sistema para el portal de turnos e ingeniería de requerimientos completa para MoneyMate App.",
+      "Levantamiento de sistema para el portal de turnos e ingeniería de requerimientos completa para MoneyMate App.",
   },
 ];
 
@@ -778,7 +778,7 @@ export const projects: Project[] = [
         title: "Equipo y alcance",
         items: [
           "Equipo ficticio de 6 roles: Jefe de Proyecto Senior, Desarrolladora Frontend Senior, Desarrollador Backend Senior, Analista Funcional, DBA SQL Server Senior y Tester de Aplicaciones Senior.",
-          "El registro cubre las dos primeras semanas del proyecto: relevamiento, diseño de pantallas, configuración de ambientes y primeras historias de usuario.",
+          "El registro cubre las dos primeras semanas del proyecto: levantamiento, diseño de pantallas, configuración de ambientes y primeras historias de usuario.",
         ],
       },
     ],
@@ -1368,10 +1368,10 @@ export const projects: Project[] = [
     id: "fa-portal",
     area: "fa",
     group: "Portal de Turnos Médicos",
-    title: "Relevamiento y Análisis de Sistema",
+    title: "Levantamiento y Análisis de Sistema",
     summary:
       "Mapa de aplicaciones actual vs nuevo portal, reglas de validación y matriz de falencias y mejoras.",
-    tags: ["Relevamiento", "Mapa de aplicaciones", "Reglas de negocio"],
+    tags: ["Levantamiento", "Mapa de aplicaciones", "Reglas de negocio"],
     sections: [
       {
         title: "Entregables",
@@ -1385,7 +1385,7 @@ export const projects: Project[] = [
     files: [
       {
         href: "/media/projects/fa-portal/files/relevamiento-analisis-sistema.docx",
-        label: "Relevamiento y Análisis de Sistema",
+        label: "Levantamiento y Análisis de Sistema",
         format: "docx",
         size: "65 KB",
         note: "Mapa de aplicaciones",
