@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Github, Linkedin, Mail, MessageCircle, Send } from "lucide-react";
+import { Github, Linkedin, Mail, Send } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 import { profile } from "@/data/portfolio";
 import { portraitOutline } from "@/data/portrait-outline";
 import { cn } from "@/lib/utils";
+
+import { WhatsAppIcon } from "./WhatsAppIcon";
 
 // Foto local optimizada (574×752, WebP con transparencia).
 const PHOTO_URL = "/media/gimena-gauna.webp";
@@ -16,13 +18,13 @@ export const socials = [
   {
     label: "WhatsApp Argentina",
     href: profile.whatsappArgentinaUrl,
-    icon: MessageCircle,
+    icon: WhatsAppIcon,
     flag: "🇦🇷",
   },
   {
     label: "WhatsApp Chile",
     href: profile.whatsappChileUrl,
-    icon: MessageCircle,
+    icon: WhatsAppIcon,
     flag: "🇨🇱",
   },
 ];

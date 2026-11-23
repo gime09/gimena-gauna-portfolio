@@ -8,7 +8,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  MessageCircle,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -16,6 +15,7 @@ import { PageHeader, trackSpotlight } from "@/components/portfolio/ui";
 import { cvs } from "@/data/cvs";
 import { profile } from "@/data/portfolio";
 import { canonical, pageMeta } from "@/data/site";
+import { WhatsAppIcon } from "@/components/portfolio/WhatsAppIcon";
 
 export const Route = createFileRoute("/contacto")({
   head: () => ({
@@ -32,14 +32,14 @@ export const Route = createFileRoute("/contacto")({
 const channels = [
   { icon: Mail, label: "Correo", value: profile.email, href: profile.emailUrl },
   {
-    icon: MessageCircle,
+    icon: WhatsAppIcon,
     label: "WhatsApp Argentina",
     value: profile.whatsappArgentinaDisplay,
     href: profile.whatsappArgentinaUrl,
     flag: "🇦🇷",
   },
   {
-    icon: MessageCircle,
+    icon: WhatsAppIcon,
     label: "WhatsApp Chile",
     value: profile.whatsappChileDisplay,
     href: profile.whatsappChileUrl,
