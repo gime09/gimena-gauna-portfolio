@@ -68,6 +68,12 @@ export function ProjectCard({ project }: { project: Project }) {
 
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.summary}</p>
 
+        {project.caseNote && (
+          <div className="mt-4 rounded-xl border border-primary/20 bg-primary/[0.08] px-3 py-2.5 text-xs leading-relaxed text-foreground/80">
+            {project.caseNote}
+          </div>
+        )}
+
         {metrics.length > 0 && (
           <dl
             className={cn(

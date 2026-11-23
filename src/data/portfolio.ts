@@ -26,6 +26,7 @@ export type Project = {
   group: string;
   title: string;
   summary: string;
+  caseNote?: string;
   tags: string[];
   metrics?: Metric[];
   sections: { title: string; items: ProjectSectionItem[] }[];
@@ -1370,6 +1371,7 @@ export const projects: Project[] = [
     caseId: "portal-turnos",
     group: "Portal de Turnos Médicos",
     title: "Levantamiento y Análisis de Sistema",
+    caseNote: "Caso Portal de Turnos Médicos · levantamiento y análisis funcional.",
     summary:
       "Mapa de aplicaciones actual vs nuevo portal, reglas de validación y matriz de falencias y mejoras.",
     tags: ["Levantamiento", "Mapa de aplicaciones", "Reglas de negocio"],
@@ -1399,6 +1401,7 @@ export const projects: Project[] = [
     caseId: "moneymate",
     group: "MoneyMate App",
     title: "Desglose jerárquico de requerimientos",
+    caseNote: "Caso MoneyMate App · organización del backlog por niveles y roles.",
     summary: "Épicas > Historias de Usuario > Características > Tareas distribuidas por rol.",
     tags: ["Épicas", "Historias de Usuario", "Backlog"],
     metrics: [{ value: "5", label: "Roles con tareas" }],
@@ -1427,6 +1430,7 @@ export const projects: Project[] = [
     caseId: "moneymate",
     group: "MoneyMate App",
     title: "Elicitación y especificación",
+    caseNote: "Caso MoneyMate App · técnicas para descubrir y especificar requerimientos.",
     summary: "Entrevistas simuladas, Casos de Uso vs HdU, BDD en Gherkin y Planning Poker.",
     tags: ["Entrevistas", "Casos de Uso", "Gherkin", "Planning Poker"],
     sections: [
@@ -1456,6 +1460,7 @@ export const projects: Project[] = [
     caseId: "moneymate",
     group: "MoneyMate App",
     title: "Priorización y roadmap",
+    caseNote: "Caso MoneyMate App · priorización de valor, esfuerzo y releases.",
     summary: "Matriz valor vs esfuerzo y mapa de releases y sprints.",
     tags: ["Priorización", "Roadmap", "Releases"],
     metrics: [
