@@ -33,9 +33,15 @@ const channels = [
   { icon: Mail, label: "Correo", value: profile.email, href: `mailto:${profile.email}` },
   {
     icon: MessageCircle,
-    label: "WhatsApp",
-    value: profile.whatsappDisplay,
-    href: profile.whatsappUrl,
+    label: "WhatsApp Argentina",
+    value: profile.whatsappArgentinaDisplay,
+    href: profile.whatsappArgentinaUrl,
+  },
+  {
+    icon: MessageCircle,
+    label: "WhatsApp Chile",
+    value: profile.whatsappChileDisplay,
+    href: profile.whatsappChileUrl,
   },
   { icon: Linkedin, label: "LinkedIn", value: "gimena-gauna", href: profile.linkedin },
   { icon: Github, label: "GitHub", value: "gime09", href: profile.github },

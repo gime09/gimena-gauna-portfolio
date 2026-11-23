@@ -13,7 +13,12 @@ export const socials = [
   { label: "GitHub", href: profile.github, icon: Github },
   { label: "LinkedIn", href: profile.linkedin, icon: Linkedin },
   { label: "Correo", href: `mailto:${profile.email}`, icon: Mail },
-  { label: "WhatsApp", href: profile.whatsappUrl, icon: MessageCircle },
+  {
+    label: "WhatsApp Argentina",
+    href: profile.whatsappArgentinaUrl,
+    icon: MessageCircle,
+  },
+  { label: "WhatsApp Chile", href: profile.whatsappChileUrl, icon: MessageCircle },
 ];
 
 export function SocialLinks({ className }: { className?: string }) {

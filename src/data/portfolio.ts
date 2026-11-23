@@ -46,8 +46,10 @@ export const profile = {
     "Técnica en Programación (UTN). Participo en el ciclo completo del software: entiendo el negocio, analizo, planifico y aseguro la calidad.",
   bio: "Técnica en Programación (UTN), con formación en QA, Análisis Funcional y Gestión de proyectos. Participo en el ciclo completo de software: comprensión de negocio, análisis funcional, planificación y aseguramiento de calidad. Utilizo agentes de IA como apoyo para analizar, documentar, generar escenarios y mejorar continuamente la calidad.",
   email: "gimegauna12345678@gmail.com",
-  whatsappDisplay: "+54 9 261 5259143",
-  whatsappUrl: "https://wa.me/5492615259143",
+  whatsappArgentinaDisplay: "+54 9 261 5259143",
+  whatsappArgentinaUrl: "https://wa.me/5492615259143",
+  whatsappChileDisplay: "+56 9 5690 4000",
+  whatsappChileUrl: "https://wa.me/56956904000",
   github: "https://github.com/gime09?tab=repositories",
   linkedin: "https://www.linkedin.com/in/gimena-gauna-08925a197/",
 };
