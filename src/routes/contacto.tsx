@@ -36,12 +36,14 @@ const channels = [
     label: "WhatsApp Argentina",
     value: profile.whatsappArgentinaDisplay,
     href: profile.whatsappArgentinaUrl,
+    flag: "🇦🇷",
   },
   {
     icon: MessageCircle,
     label: "WhatsApp Chile",
     value: profile.whatsappChileDisplay,
     href: profile.whatsappChileUrl,
+    flag: "🇨🇱",
   },
   { icon: Linkedin, label: "LinkedIn", value: "gimena-gauna", href: profile.linkedin },
   { icon: Github, label: "GitHub", value: "gime09", href: profile.github },
@@ -108,8 +110,13 @@ function ContactPage() {
             onMouseMove={trackSpotlight}
             className="spotlight group flex items-center gap-4 rounded-2xl glass p-5"
           >
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center gap-1 rounded-xl bg-primary/15 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
               <c.icon className="h-5 w-5" />
+              {c.flag && (
+                <span className="ml-0.5 text-sm" aria-hidden="true">
+                  {c.flag}
+                </span>
+              )}
             </span>
             <span className="min-w-0 flex-1">
               <span className="block text-xs font-semibold uppercase tracking-widest text-muted-foreground">

@@ -17,8 +17,14 @@ export const socials = [
     label: "WhatsApp Argentina",
     href: profile.whatsappArgentinaUrl,
     icon: MessageCircle,
+    flag: "🇦🇷",
   },
-  { label: "WhatsApp Chile", href: profile.whatsappChileUrl, icon: MessageCircle },
+  {
+    label: "WhatsApp Chile",
+    href: profile.whatsappChileUrl,
+    icon: MessageCircle,
+    flag: "🇨🇱",
+  },
 ];
 
 export function SocialLinks({ className }: { className?: string }) {
@@ -32,9 +38,14 @@ export function SocialLinks({ className }: { className?: string }) {
           rel="noreferrer"
           aria-label={s.label}
           title={s.label}
-          className="grid h-11 w-11 place-items-center rounded-full border border-foreground/60 text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-primary-foreground"
+          className="flex h-11 w-11 items-center justify-center gap-0.5 rounded-full border border-foreground/60 text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-primary-foreground"
         >
-          <s.icon className="h-[18px] w-[18px]" />
+          <s.icon className="h-[17px] w-[17px]" />
+          {s.flag && (
+            <span className="text-[11px]" aria-hidden="true">
+              {s.flag}
+            </span>
+          )}
         </a>
       ))}
     </div>
