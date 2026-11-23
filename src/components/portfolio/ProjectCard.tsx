@@ -32,6 +32,12 @@ function RepoLink({ href, className }: { href: string; className?: string }) {
 
 export function ProjectCard({ project }: { project: Project }) {
   const metrics = project.metrics?.slice(0, 3) ?? [];
+  const previewItems =
+    project.area === "fa"
+      ? (project.sections[0]?.items
+          .filter((item): item is string => typeof item === "string")
+          .slice(0, 4) ?? [])
+      : [];
   const imageCount = project.images?.length ?? 0;
   const fileCount = project.files?.length ?? 0;
   const mediaSummary = [
@@ -71,6 +77,22 @@ export function ProjectCard({ project }: { project: Project }) {
         {project.caseNote && (
           <div className="mt-4 rounded-xl border border-primary/20 bg-primary/[0.08] px-3 py-2.5 text-xs leading-relaxed text-foreground/80">
             {project.caseNote}
+          </div>
+        )}
+
+        {previewItems.length > 0 && (
+          <div className="mt-4 rounded-xl border border-glass-border bg-foreground/[0.04] px-3 py-2.5">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-primary">
+              Incluye
+            </p>
+            <ul className="mt-1.5 space-y-1 text-xs leading-relaxed text-muted-foreground">
+              {previewItems.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
 
