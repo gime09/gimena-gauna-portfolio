@@ -98,7 +98,7 @@ const tools = [
 function AboutPage() {
   return (
     <div className="space-y-12">
-      <PageHeader eyebrow="Sobre mí" title="De enseñar historia a asegurar" accent="calidad" />
+      <PageHeader eyebrow="Sobre mí" title="Del análisis a la calidad de" accent="software" />
 
       <GlassCard>
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">{profile.bio}</p>
