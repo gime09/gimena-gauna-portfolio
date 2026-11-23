@@ -1517,11 +1517,24 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: "Contenido",
+        title: "Priorización y criterio de decisión",
         items: [
-          "Matriz de valor frente a esfuerzo para priorizar.",
-          "Mapa de 2 releases y 4 sprints.",
-          "Aislamiento de los riesgos técnicos en sprints específicos.",
+          "Las 5 Historias de Usuario se ordenaron por relación valor/tamaño: valor de negocio según la entrevista de elicitación y story points del Planning Poker.",
+          "La priorización respeta las dependencias técnicas entre Historias de Usuario.",
+        ],
+      },
+      {
+        title: "Roadmap",
+        items: [
+          "Roadmap visual de 2 releases y 4 sprints.",
+          "La Historia de Usuario de mayor riesgo técnico quedó aislada en su propio sprint.",
+          "Criterio de decisión documentado para ordenar las entregas.",
+        ],
+      },
+      {
+        title: "Reflexión",
+        items: [
+          "Reflexión sobre IDR (requerimiento como insumo técnico) y GDR (requerimiento como insumo de gestión).",
         ],
       },
     ],
