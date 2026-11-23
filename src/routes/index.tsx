@@ -4,7 +4,7 @@ import { useState, type KeyboardEvent } from "react";
 
 import { ProfileCard } from "@/components/portfolio/ProfileCard";
 import { ProjectCard } from "@/components/portfolio/ProjectCard";
-import { Eyebrow, GlassCard, trackSpotlight } from "@/components/portfolio/ui";
+import { Eyebrow, GlassCard, SectionTitle, trackSpotlight } from "@/components/portfolio/ui";
 import { cvs } from "@/data/cvs";
 import {
   areas,
@@ -169,11 +169,34 @@ function Index() {
               {current.description}
             </p>
           </GlassCard>
-          <div className="grid gap-4 md:grid-cols-2">
-            {preview.map((p) => (
-              <ProjectCard key={p.id} project={p} />
-            ))}
-          </div>
+          {area === "fa" ? (
+            <div className="space-y-8">
+              {[
+                { caseId: "portal-turnos", title: "Portal de Turnos Médicos" },
+                { caseId: "moneymate", title: "MoneyMate App" },
+              ].map((caseItem) => {
+                const caseProjects = preview.filter((p) => p.caseId === caseItem.caseId);
+                return (
+                  <section key={caseItem.caseId} aria-labelledby={`home-case-${caseItem.caseId}`}>
+                    <SectionTitle count={caseProjects.length}>
+                      <span id={`home-case-${caseItem.caseId}`}>{caseItem.title}</span>
+                    </SectionTitle>
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {caseProjects.map((p) => (
+                        <ProjectCard key={p.id} project={p} />
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="grid gap-4 md:grid-cols-2">
+              {preview.map((p) => (
+                <ProjectCard key={p.id} project={p} />
+              ))}
+            </div>
+          )}
           {total > preview.length && (
             <Link
               to={current.to}
