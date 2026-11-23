@@ -179,7 +179,9 @@ function Index() {
               to={current.to}
               className="group inline-flex items-center gap-2 rounded-full border border-primary px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
             >
-              Ver los {total} proyectos de {current.label}
+              {current.id === "pm"
+                ? `Ver los ${total} documentos de ${current.label}`
+                : `Ver los ${total} proyectos de ${current.label}`}
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           )}
