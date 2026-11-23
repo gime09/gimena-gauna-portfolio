@@ -4,6 +4,7 @@ import {
   GraduationCap,
   HeartHandshake,
   Megaphone,
+  RefreshCw,
   Search,
   Sparkles,
   Target,
@@ -74,6 +75,11 @@ const approach = [
     icon: Sparkles,
     title: "Atención al detalle",
     text: "Documento lo que se asume y lo que no está escrito: ahí suelen esconderse los errores.",
+  },
+  {
+    icon: RefreshCw,
+    title: "Metodología ágil Scrum",
+    text: "Organizo el trabajo en ciclos cortos, priorizo el valor, reviso avances con el equipo y adapto el plan a partir de la evidencia.",
   },
 ];
 
@@ -166,7 +172,7 @@ function AboutPage() {
 
       <section>
         <SectionTitle>Enfoque metodológico</SectionTitle>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {approach.map((a) => (
             <GlassCard key={a.title} interactive>
               <a.icon className="h-6 w-6 text-primary" />
