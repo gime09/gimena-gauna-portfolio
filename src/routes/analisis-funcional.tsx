@@ -26,7 +26,7 @@ function FaPage() {
       eyebrow="Análisis Funcional"
       title="Traducir el negocio en requisitos"
       accent="claros"
-      description="Separo dos casos: el levantamiento del Portal de Turnos Médicos y la ingeniería de requerimientos de MoneyMate App."
+      description="Dos casos: levantamiento del Portal de Turnos Médicos e ingeniería de requerimientos para MoneyMate App."
       cases={[
         {
           caseId: "portal-turnos",
