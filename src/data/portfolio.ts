@@ -1426,7 +1426,7 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: "Revisión crítica",
+        title: "Revisión crítica (realizada por la IA)",
         items: [
           "Criterios de aceptación faltantes.",
           "Casos borde no cubiertos.",
