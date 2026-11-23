@@ -6,6 +6,7 @@ import {
   FileCode2,
   FileSpreadsheet,
   FileText,
+  FileType,
   Presentation,
   X,
 } from "lucide-react";
@@ -25,6 +26,7 @@ const fileIcons = {
   xlsx: FileSpreadsheet,
   pptx: Presentation,
   xml: FileCode2,
+  pdf: FileType,
 } satisfies Record<ProjectFile["format"], typeof FileText>;
 
 const fileColors: Record<ProjectFile["format"], string> = {
@@ -32,6 +34,7 @@ const fileColors: Record<ProjectFile["format"], string> = {
   xlsx: "text-success",
   pptx: "text-warning",
   xml: "text-chart-5",
+  pdf: "text-destructive",
 };
 
 export function ProjectGallery({ images, title }: { images: ProjectImage[]; title: string }) {

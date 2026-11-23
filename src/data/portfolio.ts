@@ -11,7 +11,7 @@ export type ProjectImage = {
 export type ProjectFile = {
   href: string;
   label: string;
-  format: "docx" | "xlsx" | "pptx" | "xml";
+  format: "docx" | "xlsx" | "pptx" | "xml" | "pdf";
   size: string;
   note?: string;
 };
@@ -21,6 +21,8 @@ export type ProjectSectionItem = string | { text: string; href: string };
 export type Project = {
   id: string;
   area: AreaId;
+  /** Agrupa los entregables que pertenecen al mismo caso integral. */
+  caseId?: string;
   group: string;
   title: string;
   summary: string;
@@ -71,9 +73,9 @@ export const areas: {
     to: "/project-management",
     label: "Gestión de proyectos",
     short: "Gestión",
-    tagline: "Portal de Autogestión de Turnos Médicos",
+    tagline: "Dos casos integrales de punta a punta",
     description:
-      "Caso integral de punta a punta: acta de constitución, kick off, Gantt, horas hombre, riesgos, desvíos y cierre.",
+      "Portal de Autogestión de Turnos Médicos y Modernización del MCD de Clínica Las Violetas: nueve entregables por caso, del acta de constitución al cierre.",
   },
   {
     id: "fa",
@@ -611,6 +613,7 @@ export const projects: Project[] = [
   {
     id: "pm-charter",
     area: "pm",
+    caseId: "turnos",
     step: 1,
     group: "Inicio",
     title: "Acta de Constitución",
@@ -650,6 +653,7 @@ export const projects: Project[] = [
   {
     id: "pm-kickoff",
     area: "pm",
+    caseId: "turnos",
     step: 2,
     group: "Inicio",
     title: "Presentación Kick Off",
@@ -685,6 +689,7 @@ export const projects: Project[] = [
   {
     id: "pm-gantt",
     area: "pm",
+    caseId: "turnos",
     step: 3,
     group: "Planificación",
     title: "Cronograma Gantt",
@@ -714,6 +719,7 @@ export const projects: Project[] = [
   {
     id: "pm-risks",
     area: "pm",
+    caseId: "turnos",
     step: 4,
     group: "Planificación",
     title: "Plan de Gestión de Riesgos",
@@ -753,6 +759,7 @@ export const projects: Project[] = [
   {
     id: "pm-hh",
     area: "pm",
+    caseId: "turnos",
     step: 5,
     group: "Seguimiento",
     title: "Control de Horas Hombre",
@@ -788,6 +795,7 @@ export const projects: Project[] = [
   {
     id: "pm-status",
     area: "pm",
+    caseId: "turnos",
     step: 6,
     group: "Seguimiento",
     title: "Reporte de Avance",
@@ -832,6 +840,7 @@ export const projects: Project[] = [
   {
     id: "pm-deviation",
     area: "pm",
+    caseId: "turnos",
     step: 7,
     group: "Seguimiento",
     title: "Programación Inicial vs Final",
@@ -868,6 +877,7 @@ export const projects: Project[] = [
   {
     id: "pm-effort",
     area: "pm",
+    caseId: "turnos",
     step: 8,
     group: "Seguimiento",
     title: "Cuantificación de Esfuerzos",
@@ -915,6 +925,7 @@ export const projects: Project[] = [
   {
     id: "pm-closure",
     area: "pm",
+    caseId: "turnos",
     step: 9,
     group: "Cierre",
     title: "Acta de Cierre",
@@ -923,11 +934,20 @@ export const projects: Project[] = [
     metrics: [{ value: "$8.180.000", label: "Liquidación final" }],
     sections: [
       {
-        title: "Contenido",
+        title: "Estructura",
         items: [
-          "Liquidación final de $8.180.000, por debajo del presupuesto inicial.",
-          "Balance de objetivos alcanzados.",
-          "Lecciones aprendidas sobre la gestión de dependencias externas.",
+          "Datos generales y resumen ejecutivo del proyecto.",
+          "Objetivos planificados frente a los alcanzados, y entregables completados.",
+          "Desviaciones registradas, con referencia al Informe de Programación Inicial vs Final.",
+          "Estado financiero final y lecciones aprendidas.",
+          "Transición a operación y soporte, criterios de cierre cumplidos y aprobaciones.",
+        ],
+      },
+      {
+        title: "Cierre real y ejecución financiera",
+        items: [
+          "Cierre real el 20-06-2024, con 20 días de desviación respecto de la fecha planificada del 31-05-2024, por el mismo motivo documentado en el informe de programación.",
+          "Ejecución financiera final de $8.180.000 sobre un presupuesto total de $8.500.000, incluyendo $680.000 de la reserva de contingencia consumidos por la desviación.",
         ],
       },
     ],
@@ -938,6 +958,407 @@ export const projects: Project[] = [
         format: "docx",
         size: "11 KB",
         note: "Liquidación final",
+      },
+    ],
+  },
+
+  // ─── Gestión de proyectos · Caso 2: Modernización del MCD ───
+  {
+    id: "pm2-charter",
+    area: "pm",
+    caseId: "mcd",
+    step: 1,
+    group: "Inicio",
+    title: "Acta de Constitución e Interesados",
+    summary:
+      "Autorización formal, objetivos medibles, presupuesto, plazo y registro de los 10 interesados del holding.",
+    tags: ["Inicio", "Interesados", "Presupuesto"],
+    metrics: [
+      { value: "38", label: "Días hábiles" },
+      { value: "$28.000.000", label: "Presupuesto aprobado" },
+      { value: "10", label: "Interesados" },
+    ],
+    sections: [
+      {
+        title: "Estructura",
+        items: [
+          "Propósito y justificación: Oracle Forms está fuera de soporte, se instala equipo por equipo y no admite nuevos puntos de acceso.",
+          "Seis objetivos específicos con métrica: 3 de 3 mantenedores, 45 usuarios, 4 perfiles, alta de oficina bajo 4 horas y 0 defectos críticos.",
+          "Alcance preliminar, supuestos, restricciones normativas (Ley 19.628) y seis riesgos iniciales con su respuesta.",
+          "Hitos, presupuesto, criterios de éxito y límites de autoridad de la jefa de proyecto.",
+          "Registro de interesados con rol, expectativa, influencia y estrategia, más la matriz poder–interés.",
+        ],
+      },
+      {
+        title: "Datos clave",
+        items: [
+          "Presupuesto aprobado: $28.000.000. Oferta de Andes TI: $27.720.986; saldo no asignado: $279.014.",
+          "Plazo: 38 días hábiles, del 02-03-2026 al 23-04-2026. Esfuerzo estimado: 614 horas.",
+          "Hitos: kickoff 05-03, alcance y diseño 19-03, Sprint 1 31-03, Sprint 2 07-04, UAT 13-04, producción 15-04, marcha blanca 17-04, aceptación final 21-04 y acta de cierre 22-04.",
+        ],
+      },
+    ],
+    files: [
+      {
+        href: "/media/projects/pm2-charter/files/acta-constitucion-e-interesados.pdf",
+        label: "Acta de Constitución e Interesados",
+        format: "pdf",
+        size: "25 KB",
+        note: "7 páginas",
+      },
+    ],
+  },
+  {
+    id: "pm2-scope",
+    area: "pm",
+    caseId: "mcd",
+    step: 2,
+    group: "Planificación",
+    title: "Enunciado del Alcance",
+    summary:
+      "Producto, 12 requerimientos funcionales, 10 no funcionales, 5 historias de usuario y 8 exclusiones explícitas.",
+    tags: ["Alcance", "Requerimientos", "Exclusiones"],
+    metrics: [
+      { value: "12", label: "Requerimientos funcionales" },
+      { value: "10", label: "No funcionales" },
+      { value: "8", label: "Exclusiones" },
+    ],
+    sections: [
+      {
+        title: "Estructura",
+        items: [
+          "Justificación y costo de la inacción: cada oficina nueva exige 3 días de instalación y no hay trazabilidad de cambios.",
+          "Descripción del producto en cuatro capas y siete módulos: autenticación, Tipología, Direcciones, Información, integración, reportes y auditoría.",
+          "12 requerimientos funcionales con prioridad Must o Should, fuente y criterio de aceptación verificable.",
+          "10 requerimientos no funcionales: disponibilidad 99,5%, p95 bajo 3 segundos, OWASP, WCAG 2.1 AA, RTO 4 h y RPO 24 h.",
+          "5 historias de usuario, criterios de aceptación por entregable y 8 exclusiones declaradas.",
+        ],
+      },
+      {
+        title: "Datos clave",
+        items: [
+          "10 de los 12 requerimientos funcionales son Must: definen el mínimo aceptable para la puesta en marcha.",
+          "Las exclusiones cubren hardware, licenciamiento, red y respaldos, directorio activo, sistemas externos, otras filiales, soporte posterior y depuración manual de datos.",
+          "Restricciones: cierre el 23-04-2026, presupuesto máximo de $28.000.000 y plataforma .NET sobre la infraestructura del holding.",
+        ],
+      },
+    ],
+    files: [
+      {
+        href: "/media/projects/pm2-scope/files/enunciado-del-alcance.pdf",
+        label: "Enunciado del Alcance",
+        format: "pdf",
+        size: "23 KB",
+        note: "7 páginas",
+      },
+    ],
+  },
+  {
+    id: "pm2-wbs",
+    area: "pm",
+    caseId: "mcd",
+    step: 3,
+    group: "Planificación",
+    title: "EDT y Diccionario",
+    summary:
+      "Seis fases, 12 entregables y 49 paquetes de trabajo, cada uno con responsable, duración, horas, costo y criterio de aceptación.",
+    tags: ["EDT", "Diccionario", "Paquetes de trabajo"],
+    metrics: [
+      { value: "6", label: "Fases" },
+      { value: "12", label: "Entregables" },
+      { value: "49", label: "Paquetes" },
+    ],
+    sections: [
+      {
+        title: "Estructura",
+        items: [
+          "Descomposición en tres niveles: fases, entregables y paquetes de trabajo.",
+          "49 paquetes con responsable principal, duración, horas y costo; el diccionario agrega la descripción del trabajo y el criterio de aceptación.",
+          "Hoja de resumen por fase con paquetes, horas, costo directo y participación porcentual.",
+        ],
+      },
+      {
+        title: "Datos clave",
+        items: [
+          "Costo directo total: $20.090.000 y 614 horas, distribuidos en las seis fases.",
+          "Gestión del Proyecto concentra 15 paquetes, 148 horas y $6.600.000 (32,9% del costo directo).",
+          "Construcción aporta 12 paquetes y 164 horas; Análisis y Diseño, 9 paquetes y 120 horas.",
+        ],
+      },
+    ],
+    files: [
+      {
+        href: "/media/projects/pm2-wbs/files/edt-y-diccionario.xlsx",
+        label: "EDT y Diccionario",
+        format: "xlsx",
+        size: "18 KB",
+        note: "4 hojas",
+      },
+    ],
+  },
+  {
+    id: "pm2-schedule",
+    area: "pm",
+    caseId: "mcd",
+    step: 4,
+    group: "Planificación",
+    title: "Cronograma y Ruta Crítica",
+    summary:
+      "38 días hábiles con 9 hitos, curva S diaria y seis tramos de ruta crítica sin holgura.",
+    tags: ["Gantt", "Ruta crítica", "Hitos"],
+    metrics: [
+      { value: "38", label: "Días hábiles" },
+      { value: "9", label: "Hitos" },
+      { value: "0", label: "Días de holgura" },
+    ],
+    sections: [
+      {
+        title: "Estructura",
+        items: [
+          "Cronograma con EDT, duración, inicio, fin, predecesoras, recursos y costo por tarea, más el diagrama de Gantt diario.",
+          "Hoja de hitos H-01 a H-09 con fecha y evidencia de aceptación.",
+          "Asignación de recursos por rol y curva S de costo planificado acumulado.",
+        ],
+      },
+      {
+        title: "Datos clave",
+        items: [
+          "Del 02-03-2026 al 23-04-2026: 38 días hábiles y 9 hitos, del kickoff al acta de cierre.",
+          "Los seis tramos de la ruta crítica tienen 0 días de holgura: cualquier atraso desplaza la fecha de término.",
+          "Los dos sprints se solapan con calidad: el plan de pruebas arranca el 20-03, antes de que termine la construcción.",
+        ],
+      },
+    ],
+    files: [
+      {
+        href: "/media/projects/pm2-schedule/files/cronograma-y-gantt.xlsx",
+        label: "Cronograma y Gantt",
+        format: "xlsx",
+        size: "18 KB",
+        note: "4 hojas",
+      },
+    ],
+  },
+  {
+    id: "pm2-cost",
+    area: "pm",
+    caseId: "mcd",
+    step: 5,
+    group: "Planificación",
+    title: "Plan de Gestión de Costos",
+    summary:
+      "Estimación ascendente, tarifas por rol, reservas, margen y curva de desembolso hasta el precio del contrato.",
+    tags: ["Costos", "BAC", "EVM"],
+    metrics: [
+      { value: "$27.720.986", label: "BAC" },
+      { value: "614", label: "Horas hombre" },
+      { value: "$2.651.880", label: "Reservas" },
+    ],
+    sections: [
+      {
+        title: "Estructura",
+        items: [
+          "Enfoque, precisión de estimación, umbrales de alerta y frecuencia de control semanal y mensual.",
+          "Estimación ascendente desde los 49 paquetes, más estimación por tres valores en los paquetes de mayor incertidumbre.",
+          "Tarifas por rol, estructura de costos por fase y reservas de contingencia (8%) y de gestión (4%).",
+          "Puente de costo a precio, curva de desembolso mensual y reglas de control con valor ganado.",
+        ],
+      },
+      {
+        title: "Datos clave",
+        items: [
+          "Costo directo $20.090.000 + indirectos $2.009.000 + reservas $2.651.880 = costo total $24.750.880.",
+          "Margen de la consultora de 12% ($2.970.106) hasta un precio de contrato de $27.720.986.",
+          "El contrato queda $279.014 bajo el presupuesto aprobado de $28.000.000; el saldo es holgura del cliente.",
+          "Desembolso de costos directos: $12.222.759 en marzo (60,8%) y $7.867.241 en abril (39,2%).",
+        ],
+      },
+    ],
+    files: [
+      {
+        href: "/media/projects/pm2-cost/files/plan-gestion-costos.pdf",
+        label: "Plan de Gestión de Costos",
+        format: "pdf",
+        size: "19 KB",
+        note: "6 páginas",
+      },
+    ],
+  },
+  {
+    id: "pm2-quality",
+    area: "pm",
+    caseId: "mcd",
+    step: 6,
+    group: "Planificación",
+    title: "Plan de Gestión de Calidad",
+    summary:
+      "Once factores medibles, siete niveles de prueba, gestión de defectos por severidad y cinco puertas de calidad.",
+    tags: ["Calidad", "ISO 25010", "Puertas"],
+    metrics: [
+      { value: "11", label: "Factores" },
+      { value: "7", label: "Niveles de prueba" },
+      { value: "5", label: "Puertas" },
+    ],
+    sections: [
+      {
+        title: "Estructura",
+        items: [
+          "Política, objetivos y roles de calidad con matriz RACI.",
+          "Estándares: ISO 9001, ISO/IEC 25010, OWASP ASVS, WCAG 2.1 AA y Leyes 19.628 y 21.719.",
+          "Línea base con 11 factores, cada uno con métrica, umbral, frecuencia y responsable.",
+          "Aseguramiento (revisión por pares, definición de terminado, auditorías) y control con siete niveles de prueba.",
+          "Defectos por severidad, cinco puertas de calidad y tratamiento de no conformidades.",
+        ],
+      },
+      {
+        title: "Datos clave",
+        items: [
+          "Umbrales: cobertura unitaria ≥ 70%, ≥ 95% de casos exitosos, CPI ≥ 0,95 y 0 defectos críticos al cierre.",
+          "Puertas: G1 diseño (19-03), G2 Sprint 1 (31-03), G3 Sprint 2 (07-04), G4 pre-producción (14-04) y G5 cierre (23-04).",
+          "Un defecto crítico tiene 4 horas para corregirse y uno alto 8 horas; ambos bloquean la aceptación.",
+        ],
+      },
+    ],
+    files: [
+      {
+        href: "/media/projects/pm2-quality/files/plan-gestion-calidad.pdf",
+        label: "Plan de Gestión de Calidad",
+        format: "pdf",
+        size: "20 KB",
+        note: "6 páginas",
+      },
+    ],
+  },
+  {
+    id: "pm2-hr",
+    area: "pm",
+    caseId: "mcd",
+    step: 7,
+    group: "Planificación",
+    title: "Plan de Recursos Humanos",
+    summary:
+      "Estructura del equipo, límites de autoridad, matriz RACI y dedicación por fase para 614 horas.",
+    tags: ["Equipo", "RACI", "Dedicación"],
+    metrics: [
+      { value: "9", label: "Roles de ejecución" },
+      { value: "17", label: "Actividades RACI" },
+      { value: "614", label: "Horas" },
+    ],
+    sections: [
+      {
+        title: "Estructura",
+        items: [
+          "Equipo dedicado por fase, con un núcleo estable de jefatura, arquitectura y calidad.",
+          "Nueve roles de ejecución con responsabilidades y límites: qué puede y qué no puede decidir cada uno.",
+          "Matriz RACI de 17 actividades y competencias requeridas por rol.",
+          "Dedicación por persona y por fase, recurso crítico y plan de contingencia.",
+        ],
+      },
+      {
+        title: "Datos clave",
+        items: [
+          "614 horas asignadas: 176 de jefatura, 144 de desarrollo, 70 de calidad y 56 de análisis funcional.",
+          "La jefa de proyecto dedica 58% de jornada y el desarrollador .NET 47%; es el recurso crítico de la ruta.",
+          "La capacitación y los manuales se adquieren a proveedores externos homologados por el holding.",
+        ],
+      },
+    ],
+    files: [
+      {
+        href: "/media/projects/pm2-hr/files/plan-recursos-humanos.pdf",
+        label: "Plan de Recursos Humanos",
+        format: "pdf",
+        size: "23 KB",
+        note: "6 páginas",
+      },
+    ],
+  },
+  {
+    id: "pm2-procurement",
+    area: "pm",
+    caseId: "mcd",
+    step: 8,
+    group: "Planificación",
+    title: "Adquisiciones y Cierre de Contratos",
+    summary:
+      "Análisis de hacer o comprar, selección ponderada de proveedores y simulación del cierre de los tres contratos con costo.",
+    tags: ["Adquisiciones", "Contratos", "Garantías"],
+    metrics: [
+      { value: "3", label: "Contratos con costo" },
+      { value: "$28.824.986", label: "Contratos gestionados" },
+      { value: "10%", label: "Garantía retenida" },
+    ],
+    sections: [
+      {
+        title: "Estructura",
+        items: [
+          "Análisis de hacer o comprar para desarrollo, migración, pruebas, capacitación, manuales e infraestructura.",
+          "Enunciado de cinco adquisiciones y matriz de selección con precio, experiencia, calidad y disponibilidad.",
+          "Contratos a precio fijo cerrado, calendario de compras, administración, control de cambios y disputas.",
+          "Simulación del cierre: actas de recepción, liquidación, retención y liberación de garantías.",
+        ],
+      },
+      {
+        title: "Datos clave",
+        items: [
+          "Tres contratos con costo: consultoría $27.720.986, capacitación $528.000 y manuales $576.000.",
+          "Total de contratos gestionados: $28.824.986. Como ADQ-01 y ADQ-02 están incluidos en el precio de ADQ-00, el presupuesto del proyecto sigue siendo $27.720.986.",
+          "Se retiene el 10% ($2.882.499) y se libera 60 días después de la recepción conforme, entre el 09 y el 22-06-2026.",
+        ],
+      },
+    ],
+    files: [
+      {
+        href: "/media/projects/pm2-procurement/files/plan-adquisiciones-y-cierre.pdf",
+        label: "Plan de Adquisiciones y Cierre",
+        format: "pdf",
+        size: "24 KB",
+        note: "8 páginas",
+      },
+    ],
+  },
+  {
+    id: "pm2-monitoring",
+    area: "pm",
+    caseId: "mcd",
+    step: 9,
+    group: "Seguimiento",
+    title: "Seguimiento y Control",
+    summary:
+      "Control de alcance, tiempo, costo y riesgos: valor ganado al corte del 27-03-2026, registro de cambios y matriz de riesgos.",
+    tags: ["EVM", "Riesgos", "Control de cambios"],
+    metrics: [
+      { value: "0,94", label: "CPI" },
+      { value: "0,91", label: "SPI" },
+      { value: "$29.384.245", label: "EAC" },
+    ],
+    sections: [
+      {
+        title: "Estructura",
+        items: [
+          "Marco de seguimiento y técnicas aplicadas al alcance, al tiempo, al costo y a los riesgos.",
+          "Control integrado de cambios en seis pasos, con comité y umbrales de decisión.",
+          "Registro de cuatro cambios, CR-01 a CR-04, y línea base de 38 días con ruta crítica sin holgura.",
+          "Valor ganado con datos del corte, diagnóstico, acciones correctivas y matriz de siete riesgos con dueño y disparador.",
+        ],
+      },
+      {
+        title: "Datos clave",
+        items: [
+          "Corte al 27-03-2026: PV $11.565.103, EV $10.524.244 y AC $11.155.699, con 20 de los 38 días hábiles transcurridos.",
+          "CV -$631.455 y SV -$1.040.859; CPI 0,94, SPI 0,91, EAC $29.384.245 y VAC -$1.663.259.",
+          "TCPI 1,04: se requiere 3,8% más de eficiencia para cerrar dentro del BAC.",
+          "Cuatro solicitudes de cambio: dos aprobadas, una rechazada por un impacto de 12 días y una en evaluación.",
+        ],
+      },
+    ],
+    files: [
+      {
+        href: "/media/projects/pm2-monitoring/files/seguimiento-y-control.pdf",
+        label: "Plan de Seguimiento y Control",
+        format: "pdf",
+        size: "28 KB",
+        note: "8 páginas",
       },
     ],
   },
