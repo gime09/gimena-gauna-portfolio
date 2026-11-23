@@ -1377,11 +1377,22 @@ export const projects: Project[] = [
     tags: ["Levantamiento", "Mapa de aplicaciones", "Reglas de negocio"],
     sections: [
       {
-        title: "Entregables",
+        title: "Estructura",
         items: [
-          "Mapa de aplicaciones: situación actual frente al nuevo portal.",
-          "Reglas de validación documentadas y no documentadas.",
-          "Matriz de falencias y oportunidades de mejora priorizadas.",
+          "Introducción y objetivo.",
+          "Alcance del levantamiento y metodología utilizada.",
+          "Mapa de aplicaciones: diagrama de arquitectura actual frente al alcance del nuevo portal.",
+          "Descripción funcional del sistema actual: módulos y actores.",
+          "Reglas de validación relevadas, documentadas y no documentadas.",
+          "Falencias detectadas con su riesgo asociado.",
+          "Oportunidades de mejora priorizadas, cada una ligada a la falencia que resuelve.",
+          "Conclusiones.",
+        ],
+      },
+      {
+        title: "Contexto del caso",
+        items: [
+          "Este documento cierra el conjunto de evidencia de Análisis Funcional ligado al proyecto del Portal de Turnos, que ya cuenta con toda la documentación de Gestión de proyectos, y suma la mirada de levantamiento y análisis de sistema.",
         ],
       },
     ],
