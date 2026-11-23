@@ -73,9 +73,7 @@ function ContactPage() {
 
       <div>
         <h2 className="text-lg font-bold">Descargá mi CV</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Tengo una versión para cada rol. Elegí la que mejor se ajuste a lo que buscás.
-        </p>
+        <p className="mt-1 text-sm text-muted-foreground">Tengo una versión para cada rol.</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {cvs.map((cv) => (
             <a
