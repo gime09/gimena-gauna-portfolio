@@ -94,7 +94,7 @@ const cases: AreaPageCase[] = [
   {
     caseId: "mcd",
     eyebrow: "Caso 02 · Holding empresarial",
-    title: "Modernización del MCD de",
+    title: "Modernización del MCD (Mantenedor Corporativo de Datos) de",
     accent: "Clínica Las Violetas",
     description:
       "Nueve entregables para reemplazar Oracle Forms por una aplicación web, con migración de datos históricos y sin instalación local. Caso académico ficticio.",
