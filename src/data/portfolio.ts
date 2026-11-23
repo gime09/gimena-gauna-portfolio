@@ -1367,6 +1367,7 @@ export const projects: Project[] = [
   {
     id: "fa-portal",
     area: "fa",
+    caseId: "portal-turnos",
     group: "Portal de Turnos Médicos",
     title: "Levantamiento y Análisis de Sistema",
     summary:
@@ -1395,6 +1396,7 @@ export const projects: Project[] = [
   {
     id: "fa-moneymate-breakdown",
     area: "fa",
+    caseId: "moneymate",
     group: "MoneyMate App",
     title: "Desglose jerárquico de requerimientos",
     summary: "Épicas > Historias de Usuario > Características > Tareas distribuidas por rol.",
@@ -1422,6 +1424,7 @@ export const projects: Project[] = [
   {
     id: "fa-moneymate-elicitation",
     area: "fa",
+    caseId: "moneymate",
     group: "MoneyMate App",
     title: "Elicitación y especificación",
     summary: "Entrevistas simuladas, Casos de Uso vs HdU, BDD en Gherkin y Planning Poker.",
@@ -1450,6 +1453,7 @@ export const projects: Project[] = [
   {
     id: "fa-moneymate-roadmap",
     area: "fa",
+    caseId: "moneymate",
     group: "MoneyMate App",
     title: "Priorización y roadmap",
     summary: "Matriz valor vs esfuerzo y mapa de releases y sprints.",
