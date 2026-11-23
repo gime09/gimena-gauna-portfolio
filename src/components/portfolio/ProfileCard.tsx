@@ -12,7 +12,7 @@ const PHOTO_URL = "/media/gimena-gauna.webp";
 export const socials = [
   { label: "GitHub", href: profile.github, icon: Github },
   { label: "LinkedIn", href: profile.linkedin, icon: Linkedin },
-  { label: "Correo", href: `mailto:${profile.email}`, icon: Mail },
+  { label: "Correo", href: profile.emailUrl, icon: Mail },
   {
     label: "WhatsApp Argentina",
     href: profile.whatsappArgentinaUrl,

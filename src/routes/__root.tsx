@@ -185,7 +185,7 @@ function SiteFooter() {
         <p>© {new Date().getFullYear()} Gimena Gauna · Técnica en Programación (UTN)</p>
         <nav aria-label="Enlaces de contacto" className="flex flex-wrap gap-x-5 gap-y-2">
           <a
-            href={`mailto:${profile.email}`}
+            href={profile.emailUrl}
             className="transition-colors hover:text-primary focus-visible:text-primary"
           >
             Correo

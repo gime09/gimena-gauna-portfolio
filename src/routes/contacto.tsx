@@ -30,7 +30,7 @@ export const Route = createFileRoute("/contacto")({
 });
 
 const channels = [
-  { icon: Mail, label: "Correo", value: profile.email, href: `mailto:${profile.email}` },
+  { icon: Mail, label: "Correo", value: profile.email, href: profile.emailUrl },
   {
     icon: MessageCircle,
     label: "WhatsApp Argentina",
