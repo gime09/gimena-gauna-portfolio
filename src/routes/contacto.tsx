@@ -1,21 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  ArrowUpRight,
-  Check,
-  Copy,
-  Download,
-  FileText,
-  Github,
-  Linkedin,
-  Mail,
-} from "lucide-react";
-import { useState } from "react";
+import { ArrowUpRight, Download, FileText, Github, Linkedin, Mail } from "lucide-react";
 
+import { WhatsAppIcon } from "@/components/portfolio/WhatsAppIcon";
 import { PageHeader, trackSpotlight } from "@/components/portfolio/ui";
 import { cvs } from "@/data/cvs";
 import { profile } from "@/data/portfolio";
 import { canonical, pageMeta } from "@/data/site";
-import { WhatsAppIcon } from "@/components/portfolio/WhatsAppIcon";
 
 export const Route = createFileRoute("/contacto")({
   head: () => ({
@@ -50,18 +40,6 @@ const channels = [
 ];
 
 function ContactPage() {
-  const [copied, setCopied] = useState(false);
-
-  async function copyEmail() {
-    try {
-      await navigator.clipboard.writeText(profile.email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      window.location.href = `mailto:${profile.email}`;
-    }
-  }
-
   return (
     <div className="space-y-10">
       <PageHeader
@@ -125,22 +103,6 @@ function ContactPage() {
             <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:rotate-45 group-hover:text-primary" />
           </a>
         ))}
-      </div>
-
-      <div className="flex flex-col items-start gap-4 rounded-2xl glass p-6 sm:flex-row sm:items-center sm:justify-between">
-        <div className="min-w-0">
-          <p className="font-bold">¿Preferís escribirme directo?</p>
-          <p className="text-sm text-muted-foreground">
-            Copiá mi correo y contame qué perfil estás buscando.
-          </p>
-        </div>
-        <button
-          onClick={copyEmail}
-          className="inline-flex shrink-0 items-center gap-2 rounded-full btn-iridescent px-5 py-2.5 text-sm font-bold text-brand-foreground"
-        >
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-          {copied ? "Correo copiado" : "Copiar correo"}
-        </button>
       </div>
     </div>
   );
