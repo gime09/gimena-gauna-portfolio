@@ -84,7 +84,7 @@ export const areas: {
     short: "Análisis",
     tagline: "Levantamiento e ingeniería de requerimientos",
     description:
-      "Levantamiento de sistema para el portal de turnos e ingeniería de requerimientos completa para MoneyMate App.",
+      "Dos casos: levantamiento del Portal de Turnos Médicos e ingeniería de requerimientos para MoneyMate App.",
   },
 ];
 
