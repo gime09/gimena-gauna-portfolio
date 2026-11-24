@@ -3,6 +3,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Download,
+  Eye,
   FileCode2,
   FileSpreadsheet,
   FileText,
@@ -18,8 +19,10 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
-import type { ProjectFile, ProjectImage } from "@/data/portfolio";
+import { projectFilePreview, type ProjectFile, type ProjectImage } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
+
+import { DocumentPreviewDialog, type PreviewDocument } from "./DocumentPreview";
 
 const fileIcons = {
   docx: FileText,
@@ -167,44 +170,87 @@ export function ProjectGallery({ images, title }: { images: ProjectImage[]; titl
 }
 
 export function ProjectFiles({ files }: { files: ProjectFile[] }) {
-  return (
-    <ul className="space-y-2">
-      {files.map((file) => {
-        const Icon = fileIcons[file.format];
+  const [active, setActive] = useState<ProjectFile | null>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
-        return (
-          <li key={file.href}>
-            <a
-              href={file.href}
-              download
-              className="group flex items-center gap-3 rounded-xl border border-glass-border bg-foreground/[0.04] px-3 py-2.5 transition-colors hover:border-primary/60 hover:bg-foreground/[0.07]"
+  const previewDocument: PreviewDocument | null = active
+    ? {
+        title: active.label,
+        meta: [active.format.toUpperCase(), active.size, active.note].filter(Boolean).join(" · "),
+        formatLabel: active.format.toUpperCase(),
+        preview: projectFilePreview(active),
+        downloadHref: active.href,
+        downloadName: active.href.split("/").pop() ?? active.label,
+      }
+    : null;
+
+  return (
+    <>
+      <ul className="space-y-2">
+        {files.map((file) => {
+          const Icon = fileIcons[file.format];
+          const fileName = file.href.split("/").pop();
+
+          return (
+            <li
+              key={file.href}
+              className="flex items-stretch overflow-hidden rounded-xl border border-glass-border bg-foreground/[0.04] transition-colors focus-within:border-primary/60 hover:border-primary/60 hover:bg-foreground/[0.07]"
             >
-              <span
-                className={cn(
-                  "grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-foreground/[0.06]",
-                  fileColors[file.format],
-                )}
+              <button
+                type="button"
+                aria-haspopup="dialog"
+                onClick={(event) => {
+                  triggerRef.current = event.currentTarget;
+                  setActive(file);
+                }}
+                className="group flex min-w-0 flex-1 items-center gap-3 px-3 py-2.5 text-left"
               >
-                <Icon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block text-sm font-semibold leading-snug text-foreground">
-                  {file.label}
+                <span
+                  className={cn(
+                    "grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-foreground/[0.06]",
+                    fileColors[file.format],
+                  )}
+                >
+                  <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <span className="block text-xs text-muted-foreground">
-                  {file.format.toUpperCase()} · {file.size}
-                  {file.note ? ` · ${file.note}` : ""}
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-semibold leading-snug text-foreground">
+                    {file.label}
+                  </span>
+                  <span className="block text-xs text-muted-foreground">
+                    {file.format.toUpperCase()} · {file.size}
+                    {file.note ? ` · ${file.note}` : ""}
+                  </span>
                 </span>
-              </span>
-              <Download
-                className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
-                aria-hidden="true"
-              />
-              <span className="sr-only">Descargar {file.label}</span>
-            </a>
-          </li>
-        );
-      })}
-    </ul>
+                <span className="hidden shrink-0 items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground transition-colors group-hover:text-primary sm:flex">
+                  <Eye className="h-4 w-4" aria-hidden="true" />
+                  Vista previa
+                </span>
+                <Eye
+                  className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary sm:hidden"
+                  aria-hidden="true"
+                />
+                <span className="sr-only">Vista previa de {file.label}</span>
+              </button>
+              <a
+                href={file.href}
+                download={fileName}
+                aria-label={`Descargar ${file.label}`}
+                title={`Descargar ${file.format.toUpperCase()}`}
+                className="grid w-11 shrink-0 place-items-center border-l border-glass-border text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+              >
+                <Download className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+
+      <DocumentPreviewDialog
+        document={previewDocument}
+        onClose={() => setActive(null)}
+        returnFocusRef={triggerRef}
+      />
+    </>
   );
 }

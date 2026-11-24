@@ -34,6 +34,7 @@ npm run format  # formatear todo el repo
 | Perfil, áreas, proyectos y métricas        | `src/data/portfolio.ts`                     |
 | Descargas de CV (rutas y nombres)          | `src/data/cvs.ts`                           |
 | Galería, lightbox y descargas de adjuntos  | `src/components/portfolio/ProjectMedia.tsx` |
+| Popup de vista previa de documentos        | `src/components/portfolio/DocumentPreview.tsx` |
 | Shell: nav, perfil, footer, 404 y error    | `src/routes/__root.tsx`                     |
 | Páginas: inicio, áreas, sobre mí, contacto | `src/routes/*.tsx`                          |
 | Foto, CV y adjuntos de proyectos           | `public/media/`                             |
@@ -56,7 +57,18 @@ En `public/media/projects/<project-id>/` están los adjuntos de cada proyecto, c
 - `images/` — capturas WebP o JPG que se muestran en la galería del detalle
 - `files/` — planillas, documentos, presentaciones y XML descargables
 
-Los nombres son ASCII y en minúsculas para evitar problemas de encoding al publicar. Los `.docx`, `.xlsx` y `.pptx` no se previsualizan: se ofrecen como descarga con formato y tamaño.
+Los nombres son ASCII y en minúsculas para evitar problemas de encoding al publicar. Cada documento tiene dos acciones: **Vista previa** (abre un popup con un PDF) y **Descarga** (entrega el archivo original). Los PDF de vista previa viven en `preview/`, junto a `files/`.
+
+### Regenerar las vistas previas
+
+Los `.docx`, `.xlsx` y `.pptx` se convierten a PDF con LibreOffice y el resultado se commitea, así el deploy no depende de tenerlo instalado:
+
+```sh
+.\scripts\build-previews.ps1                  # solo lo que cambió
+.\scripts\build-previews.ps1 -Force           # regenera todo
+```
+
+Los XML no se convierten: el popup muestra su contenido como texto. Si reemplazás un documento, volvé a correr el script y commiteá los PDFs nuevos.
 
 Para reemplazar un CV, pisá el archivo manteniendo el nombre. La foto debe conservar la proporción 574×752 porque el delineado animado (`src/data/portrait-outline.ts`) se extrajo de esa geometría.
 

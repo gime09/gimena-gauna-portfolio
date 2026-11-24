@@ -16,6 +16,26 @@ export type ProjectFile = {
   note?: string;
 };
 
+export type ProjectFilePreview = {
+  kind: "pdf" | "text";
+  href: string;
+};
+
+/**
+ * Los documentos se descargan desde /files/ y se previsualizan desde /preview/,
+ * donde vive un PDF generado con el mismo contenido.
+ * Los PDF se muestran tal cual y los XML se leen como texto plano.
+ */
+export function projectFilePreview(file: ProjectFile): ProjectFilePreview {
+  if (file.format === "xml") return { kind: "text", href: file.href };
+  if (file.format === "pdf") return { kind: "pdf", href: file.href };
+
+  return {
+    kind: "pdf",
+    href: file.href.replace(/\/files\//, "/preview/").replace(/\.(?:docx|xlsx|pptx)$/, ".pdf"),
+  };
+}
+
 export type ProjectSectionItem = string | { text: string; href: string };
 
 export type Project = {

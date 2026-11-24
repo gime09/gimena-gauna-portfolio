@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, Download, FileText, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, Download, Eye, FileText, Github, Linkedin, Mail } from "lucide-react";
+import { useRef, useState } from "react";
 
+import { DocumentPreviewDialog } from "@/components/portfolio/DocumentPreview";
 import { WhatsAppIcon } from "@/components/portfolio/WhatsAppIcon";
 import { PageHeader, trackSpotlight } from "@/components/portfolio/ui";
-import { cvs } from "@/data/cvs";
+import { cvs, type CvFile } from "@/data/cvs";
 import { profile } from "@/data/portfolio";
 import { canonical, pageMeta } from "@/data/site";
 
@@ -40,6 +42,9 @@ const channels = [
 ];
 
 function ContactPage() {
+  const [activeCv, setActiveCv] = useState<CvFile | null>(null);
+  const cvTriggerRef = useRef<HTMLButtonElement>(null);
+
   return (
     <div className="space-y-10">
       <PageHeader
@@ -54,10 +59,8 @@ function ContactPage() {
         <p className="mt-1 text-sm text-muted-foreground">Tengo una versión para cada rol.</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {cvs.map((cv) => (
-            <a
+            <div
               key={cv.id}
-              href={cv.url}
-              download={cv.filename}
               onMouseMove={trackSpotlight}
               className="spotlight group flex items-center gap-4 rounded-2xl glass p-5"
             >
@@ -70,11 +73,50 @@ function ContactPage() {
                   {cv.description}
                 </span>
               </span>
-              <Download className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:translate-y-0.5 group-hover:text-primary" />
-            </a>
+              <span className="flex shrink-0 items-center gap-1.5">
+                <button
+                  type="button"
+                  aria-haspopup="dialog"
+                  aria-label={`Vista previa del CV ${cv.label}`}
+                  onClick={(event) => {
+                    cvTriggerRef.current = event.currentTarget;
+                    setActiveCv(cv);
+                  }}
+                  className="grid h-9 w-9 place-items-center rounded-full border border-glass-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                >
+                  <Eye className="h-4 w-4" aria-hidden="true" />
+                </button>
+                <a
+                  href={cv.url}
+                  download={cv.filename}
+                  aria-label={`Descargar CV ${cv.label}`}
+                  title="Descargar"
+                  className="grid h-9 w-9 place-items-center rounded-full border border-glass-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                >
+                  <Download className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </span>
+            </div>
           ))}
         </div>
       </div>
+
+      <DocumentPreviewDialog
+        document={
+          activeCv
+            ? {
+                title: `CV · ${activeCv.label}`,
+                meta: activeCv.description,
+                formatLabel: "PDF",
+                preview: { kind: "pdf", href: activeCv.url },
+                downloadHref: activeCv.url,
+                downloadName: activeCv.filename,
+              }
+            : null
+        }
+        onClose={() => setActiveCv(null)}
+        returnFocusRef={cvTriggerRef}
+      />
 
       <div className="grid gap-4 sm:grid-cols-2">
         {channels.map((c) => (
