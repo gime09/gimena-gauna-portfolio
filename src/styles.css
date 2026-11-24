@@ -431,9 +431,9 @@
   stroke-width: 4;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 180 820;
+  stroke-dasharray: 620 380;
   filter: drop-shadow(var(--portrait-outline-glow));
-  animation: trace-outline 6s linear infinite;
+  animation: trace-outline 3.5s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
