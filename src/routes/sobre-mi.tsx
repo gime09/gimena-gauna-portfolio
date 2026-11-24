@@ -79,7 +79,7 @@ const approach = [
   {
     icon: RefreshCw,
     title: "Metodología ágil Scrum",
-    text: "Organizo el trabajo en ciclos cortos, priorizo el valor, reviso avances con el equipo y adapto el plan a partir de la evidencia.",
+    text: "Organizo el trabajo en ciclos cortos, priorizo el valor, reviso avances con el equipo y adapto el plan según la evidencia. Utilizo agentes de IA como apoyo para analizar, documentar, generar escenarios y mejorar continuamente la calidad, siempre con revisión y criterio humano.",
   },
 ];
 
@@ -172,7 +172,7 @@ function AboutPage() {
 
       <section>
         <SectionTitle>Enfoque metodológico</SectionTitle>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2">
           {approach.map((a) => (
             <GlassCard key={a.title} interactive>
               <a.icon className="h-6 w-6 text-primary" />
