@@ -9,3 +9,15 @@
 - [x] Vista previa no abre con la cuenta de Gimena — revisado: la página funciona; el bloqueo es de inicio de sesión en Lovable (cookies/navegador)
 - [x] Descargas de los cuatro CV en Contacto
 - [x] Delineado blanco animado sobre la silueta y foto más arriba, verificados en computadora y celular
+- [x] Foto y CV dentro del repo (`public/media/`), sin depender de los assets de Lovable
+- [x] Accesibilidad: skip link, foco visible, tabs con teclado, `<dl>` válido y textos alternativos
+- [x] 404 y página de error en español
+- [x] Home reestructurada: stats reales, 4 destacados por área y link al área completa
+- [x] SEO: canonical, og:image 1200×630, sitemap, robots y JSON-LD
+- [x] 44 adjuntos en `public/media/projects/`: 24 capturas y 20 archivos descargables
+- [x] Galería con lightbox (flechas, contador, Escape y foco restaurado) y descargas con formato y tamaño
+- [x] Reporte de Avance agregado como proyecto propio; Gestión de proyectos quedó con 9 entregables
+- [x] Test que valida la existencia de los 44 assets y la calidad de los textos alternativos
+- [x] Build de Vercel verificado y `vercel.json` listo
+- [ ] Publicar en Vercel con la rama `Andromeda`
+- [ ] Opcional: dominio propio y actualizar `SITE_URL` en `src/data/site.ts`

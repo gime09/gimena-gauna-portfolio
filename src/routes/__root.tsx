@@ -15,25 +15,22 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { NoiseBackground } from "@/components/portfolio/NoiseBackground";
 import { BottomNav, SideNav } from "@/components/portfolio/nav";
 import { ProfileCard } from "@/components/portfolio/ProfileCard";
+import { profile } from "@/data/portfolio";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
-      </div>
+    <div className="animate-rise rounded-3xl glass p-8 text-center sm:p-12">
+      <p className="font-serif text-6xl italic leading-none text-primary">404</p>
+      <h1 className="mt-5 text-2xl font-bold tracking-tight sm:text-3xl">Esta página no existe</h1>
+      <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
+        Puede que el enlace esté mal escrito o que la página se haya movido. Probá desde el inicio.
+      </p>
+      <Link
+        to="/"
+        className="mt-7 inline-flex items-center justify-center rounded-full btn-iridescent px-6 py-2.5 text-sm font-bold text-brand-foreground"
+      >
+        Volver al inicio
+      </Link>
     </div>
   );
 }
@@ -46,31 +43,30 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Try again
-          </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
-        </div>
+    <div className="animate-rise rounded-3xl glass p-8 text-center sm:p-12">
+      <p className="font-serif text-5xl italic leading-none text-primary">Ups</p>
+      <h1 className="mt-5 text-2xl font-bold tracking-tight sm:text-3xl">
+        No pudimos cargar esta página
+      </h1>
+      <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
+        Algo falló de nuestro lado. Podés reintentar o volver al inicio.
+      </p>
+      <div className="mt-7 flex flex-wrap justify-center gap-2">
+        <button
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
+          className="inline-flex items-center justify-center rounded-full btn-iridescent px-6 py-2.5 text-sm font-bold text-brand-foreground"
+        >
+          Reintentar
+        </button>
+        <a
+          href="/"
+          className="inline-flex items-center justify-center rounded-full border border-glass-border px-6 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
+        >
+          Ir al inicio
+        </a>
       </div>
     </div>
   );
@@ -105,13 +101,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Figtree:wght@400..800&family=Instrument+Serif:ital@0;1&display=swap",
       },
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon-portfolio.svg", type: "image/svg+xml" },
     ],
   }),
   shellComponent: RootShell,
@@ -141,6 +137,13 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <NoiseBackground />
       <div className="relative min-h-screen">
+        <a
+          href="#contenido"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-5 focus:py-3 focus:text-sm focus:font-bold focus:text-primary-foreground"
+        >
+          Saltar al contenido
+        </a>
+
         <header className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 glass-strong border-x-0 border-t-0 lg:hidden">
           <Link to="/" className="flex min-w-0 items-center gap-2">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl btn-iridescent font-serif text-lg italic text-brand-foreground">
@@ -156,19 +159,61 @@ function RootComponent() {
           </Link>
         </header>
 
-        <div className="mx-auto w-full max-w-[1440px] px-4 pb-32 pt-6 sm:px-6 lg:grid lg:grid-cols-[64px_minmax(0,320px)_minmax(0,1fr)] lg:gap-6 lg:px-8 lg:pb-12 lg:pt-10 xl:grid-cols-[64px_360px_minmax(0,1fr)] xl:gap-8">
+        <div className="mx-auto w-full max-w-[1440px] px-4 pb-6 pt-6 sm:px-6 lg:grid lg:grid-cols-[64px_minmax(0,320px)_minmax(0,1fr)] lg:gap-6 lg:px-8 lg:pb-12 lg:pt-10 xl:grid-cols-[64px_360px_minmax(0,1fr)] xl:gap-8">
           <SideNav className="hidden lg:sticky lg:top-10 lg:z-20 lg:flex lg:self-start" />
           <aside className="hidden lg:sticky lg:top-10 lg:block lg:self-start">
             <ProfileCard />
           </aside>
-          <main className="min-w-0">
+          <main id="contenido" tabIndex={-1} className="min-w-0 outline-none">
             {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
             <Outlet />
           </main>
         </div>
 
+        <SiteFooter />
+
         <BottomNav className="lg:hidden" />
       </div>
     </QueryClientProvider>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="relative z-10 mx-auto w-full max-w-[1440px] px-4 pb-28 pt-2 sm:px-6 lg:px-8 lg:pb-10">
+      <div className="flex flex-col gap-3 border-t border-glass-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <p>© {new Date().getFullYear()} Gimena Gauna · Técnica en Programación (UTN)</p>
+        <nav aria-label="Enlaces de contacto" className="flex flex-wrap gap-x-5 gap-y-2">
+          <a
+            href={profile.emailUrl}
+            className="transition-colors hover:text-primary focus-visible:text-primary"
+          >
+            Correo
+          </a>
+          <a
+            href={profile.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="transition-colors hover:text-primary focus-visible:text-primary"
+          >
+            LinkedIn
+          </a>
+          <a
+            href={profile.github}
+            target="_blank"
+            rel="noreferrer"
+            className="transition-colors hover:text-primary focus-visible:text-primary"
+          >
+            GitHub
+          </a>
+          <Link
+            to="/contacto"
+            className="transition-colors hover:text-primary focus-visible:text-primary"
+          >
+            Contacto
+          </Link>
+        </nav>
+      </div>
+    </footer>
   );
 }

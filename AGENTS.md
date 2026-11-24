@@ -1,4 +1,5 @@
 <!-- LOVABLE:BEGIN -->
+
 > [!IMPORTANT]
 > This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
 > published git history — force pushing, or rebasing/amending/squashing commits
@@ -27,9 +28,11 @@ use the editor.
   `LOVABLE_API_KEY`. When Lovable does not provide one, users can bring their
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
+
 <!-- LOVABLE:END -->
 
 ## Project rules
+
 - All portfolio content (profile, areas, projects, metrics) lives in `src/data/portfolio.ts`; pages only render it, so content edits never touch layout code.
 - Shared shell (vertical nav, profile card, mobile bottom nav, noise background) lives in `src/routes/__root.tsx`; each section is its own route for SEO.
 - Keep the portrait and its alpha-derived SVG outline in identical geometry; animate the stroke, not a duplicate photo, so the moving line follows the actual silhouette.

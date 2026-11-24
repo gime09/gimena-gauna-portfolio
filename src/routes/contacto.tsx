@@ -1,43 +1,49 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, Check, Copy, Download, FileText, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { ArrowUpRight, Download, Eye, FileText, Github, Linkedin, Mail } from "lucide-react";
+import { useRef, useState } from "react";
 
+import { DocumentPreviewDialog } from "@/components/portfolio/DocumentPreview";
+import { WhatsAppIcon } from "@/components/portfolio/WhatsAppIcon";
 import { PageHeader, trackSpotlight } from "@/components/portfolio/ui";
-import { cvs } from "@/data/cvs";
+import { cvs, type CvFile } from "@/data/cvs";
 import { profile } from "@/data/portfolio";
+import { canonical, pageMeta } from "@/data/site";
 
 export const Route = createFileRoute("/contacto")({
   head: () => ({
-    meta: [
-      { title: "Contacto · Gimena Gauna" },
-      {
-        name: "description",
-        content: "Contactá a Gimena Gauna por correo, WhatsApp, LinkedIn o GitHub.",
-      },
-      { property: "og:title", content: "Contacto · Gimena Gauna" },
-      { property: "og:description", content: "Hablemos de tu próximo proyecto de software." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    meta: pageMeta({
+      title: "Contacto · Gimena Gauna",
+      description: "Contactá a Gimena Gauna por correo, WhatsApp, LinkedIn o GitHub.",
+      path: "/contacto",
+    }),
+    links: canonical("/contacto"),
   }),
   component: ContactPage,
 });
 
 const channels = [
-  { icon: Mail, label: "Correo", value: profile.email, href: `mailto:${profile.email}` },
-  { icon: MessageCircle, label: "WhatsApp", value: profile.whatsappDisplay, href: profile.whatsappUrl },
+  { icon: Mail, label: "Correo", value: profile.email, href: profile.emailUrl },
+  {
+    icon: WhatsAppIcon,
+    label: "WhatsApp Argentina",
+    value: profile.whatsappArgentinaDisplay,
+    href: profile.whatsappArgentinaUrl,
+    flag: "🇦🇷",
+  },
+  {
+    icon: WhatsAppIcon,
+    label: "WhatsApp Chile",
+    value: profile.whatsappChileDisplay,
+    href: profile.whatsappChileUrl,
+    flag: "🇨🇱",
+  },
   { icon: Linkedin, label: "LinkedIn", value: "gimena-gauna", href: profile.linkedin },
   { icon: Github, label: "GitHub", value: "gime09", href: profile.github },
 ];
 
 function ContactPage() {
-  const [copied, setCopied] = useState(false);
-
-  async function copyEmail() {
-    await navigator.clipboard.writeText(profile.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
+  const [activeCv, setActiveCv] = useState<CvFile | null>(null);
+  const cvTriggerRef = useRef<HTMLButtonElement>(null);
 
   return (
     <div className="space-y-10">
@@ -50,17 +56,11 @@ function ContactPage() {
 
       <div>
         <h2 className="text-lg font-bold">Descargá mi CV</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Tengo una versión para cada rol. Elegí la que mejor se ajuste a lo que buscás.
-        </p>
+        <p className="mt-1 text-sm text-muted-foreground">Tengo una versión para cada rol.</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {cvs.map((cv) => (
-            <a
+            <div
               key={cv.id}
-              href={cv.url}
-              download={cv.filename}
-              target="_blank"
-              rel="noreferrer"
               onMouseMove={trackSpotlight}
               className="spotlight group flex items-center gap-4 rounded-2xl glass p-5"
             >
@@ -73,11 +73,50 @@ function ContactPage() {
                   {cv.description}
                 </span>
               </span>
-              <Download className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:translate-y-0.5 group-hover:text-primary" />
-            </a>
+              <span className="flex shrink-0 items-center gap-1.5">
+                <button
+                  type="button"
+                  aria-haspopup="dialog"
+                  aria-label={`Vista previa del CV ${cv.label}`}
+                  onClick={(event) => {
+                    cvTriggerRef.current = event.currentTarget;
+                    setActiveCv(cv);
+                  }}
+                  className="grid h-9 w-9 place-items-center rounded-full border border-glass-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                >
+                  <Eye className="h-4 w-4" aria-hidden="true" />
+                </button>
+                <a
+                  href={cv.url}
+                  download={cv.filename}
+                  aria-label={`Descargar CV ${cv.label}`}
+                  title="Descargar"
+                  className="grid h-9 w-9 place-items-center rounded-full border border-glass-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                >
+                  <Download className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </span>
+            </div>
           ))}
         </div>
       </div>
+
+      <DocumentPreviewDialog
+        document={
+          activeCv
+            ? {
+                title: `CV · ${activeCv.label}`,
+                meta: activeCv.description,
+                formatLabel: "PDF",
+                preview: { kind: "pdf", href: activeCv.url },
+                downloadHref: activeCv.url,
+                downloadName: activeCv.filename,
+              }
+            : null
+        }
+        onClose={() => setActiveCv(null)}
+        returnFocusRef={cvTriggerRef}
+      />
 
       <div className="grid gap-4 sm:grid-cols-2">
         {channels.map((c) => (
@@ -89,8 +128,13 @@ function ContactPage() {
             onMouseMove={trackSpotlight}
             className="spotlight group flex items-center gap-4 rounded-2xl glass p-5"
           >
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center gap-1 rounded-xl bg-primary/15 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
               <c.icon className="h-5 w-5" />
+              {c.flag && (
+                <span className="ml-0.5 text-sm" aria-hidden="true">
+                  {c.flag}
+                </span>
+              )}
             </span>
             <span className="min-w-0 flex-1">
               <span className="block text-xs font-semibold uppercase tracking-widest text-muted-foreground">
@@ -101,22 +145,6 @@ function ContactPage() {
             <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:rotate-45 group-hover:text-primary" />
           </a>
         ))}
-      </div>
-
-      <div className="flex flex-col items-start gap-4 rounded-2xl glass p-6 sm:flex-row sm:items-center sm:justify-between">
-        <div className="min-w-0">
-          <p className="font-bold">¿Preferís escribirme directo?</p>
-          <p className="text-sm text-muted-foreground">
-            Copiá mi correo y contame qué perfil estás buscando.
-          </p>
-        </div>
-        <button
-          onClick={copyEmail}
-          className="inline-flex shrink-0 items-center gap-2 rounded-full btn-iridescent px-5 py-2.5 text-sm font-bold text-brand-foreground"
-        >
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-          {copied ? "Correo copiado" : "Copiar correo"}
-        </button>
       </div>
     </div>
   );

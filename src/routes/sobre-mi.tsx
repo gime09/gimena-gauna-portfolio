@@ -1,26 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BookOpen, GraduationCap, HeartHandshake, Megaphone, Search, Sparkles, Target } from "lucide-react";
+import {
+  BookOpen,
+  GraduationCap,
+  HeartHandshake,
+  Megaphone,
+  RefreshCw,
+  Search,
+  Sparkles,
+  Target,
+} from "lucide-react";
 
 import { GlassCard, PageHeader, SectionTitle } from "@/components/portfolio/ui";
 import { profile } from "@/data/portfolio";
+import { canonical, pageMeta } from "@/data/site";
 
 export const Route = createFileRoute("/sobre-mi")({
   head: () => ({
-    meta: [
-      { title: "Sobre mí · Gimena Gauna" },
-      {
-        name: "description",
-        content:
-          "Trayectoria de Gimena Gauna: de Profesora de Historia y marketing digital a Técnica en Programación (UTN) en QA, PM y Análisis Funcional.",
-      },
-      { property: "og:title", content: "Sobre mí · Gimena Gauna" },
-      {
-        property: "og:description",
-        content: "Formación, enfoque metodológico y aprendizaje continuo.",
-      },
-      { property: "og:type", content: "profile" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    meta: pageMeta({
+      title: "Sobre mí · Gimena Gauna",
+      description:
+        "Trayectoria de Gimena Gauna: de Profesora de Historia y marketing digital a Técnica en Programación (UTN) en QA, PM y Análisis Funcional.",
+      path: "/sobre-mi",
+      type: "profile",
+    }),
+    links: canonical("/sobre-mi"),
   }),
   component: AboutPage,
 });
@@ -46,7 +49,7 @@ const journey = [
   },
   {
     icon: Target,
-    title: "Hoy",
+    title: "Perfil profesional",
     role: "QA · Gestión de proyectos · Análisis Funcional",
     text: "Participación en el ciclo completo: negocio, análisis, planificación y calidad.",
   },
@@ -73,6 +76,11 @@ const approach = [
     title: "Atención al detalle",
     text: "Documento lo que se asume y lo que no está escrito: ahí suelen esconderse los errores.",
   },
+  {
+    icon: RefreshCw,
+    title: "Metodología ágil Scrum",
+    text: "Organizo el trabajo en ciclos cortos, priorizo el valor, reviso avances con el equipo y adapto el plan según la evidencia. Utilizo agentes de IA como apoyo para analizar, documentar, generar escenarios y mejorar continuamente la calidad, siempre con revisión y criterio humano.",
+  },
 ];
 
 const tools = [
@@ -96,7 +104,7 @@ const tools = [
 function AboutPage() {
   return (
     <div className="space-y-12">
-      <PageHeader eyebrow="Sobre mí" title="De enseñar historia a asegurar" accent="calidad" />
+      <PageHeader eyebrow="Sobre mí" title="Del análisis a la calidad de" accent="software" />
 
       <GlassCard>
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">{profile.bio}</p>
@@ -144,8 +152,9 @@ function AboutPage() {
           <SectionTitle>Aprendizaje continuo</SectionTitle>
           <GlassCard className="h-[calc(100%-3.5rem)]">
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Cada proyecto de este portafolio es práctica aplicada: sumo herramientas nuevas —como agentes de IA
-              y self-healing locators— sin perder el criterio humano sobre qué y cómo probar.
+              Cada proyecto de este portafolio es práctica aplicada: sumo herramientas nuevas —como
+              agentes de IA y self-healing locators— sin perder el criterio humano sobre qué y cómo
+              probar.
             </p>
             <div className="mt-4 flex flex-wrap gap-1.5">
               {tools.map((t) => (
@@ -163,7 +172,7 @@ function AboutPage() {
 
       <section>
         <SectionTitle>Enfoque metodológico</SectionTitle>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2">
           {approach.map((a) => (
             <GlassCard key={a.title} interactive>
               <a.icon className="h-6 w-6 text-primary" />

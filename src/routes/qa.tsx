@@ -3,24 +3,17 @@ import { Bot, Code2, FileCheck2, Server } from "lucide-react";
 
 import { AreaPage } from "@/components/portfolio/AreaPage";
 import { GlassCard } from "@/components/portfolio/ui";
+import { canonical, pageMeta } from "@/data/site";
 
 export const Route = createFileRoute("/qa")({
   head: () => ({
-    meta: [
-      { title: "QA & Testing · Gimena Gauna" },
-      {
-        name: "description",
-        content:
-          "Proyectos de QA de Gimena Gauna: pruebas manuales, APIs con SoapUI y Postman, Selenium y testing con agentes de IA.",
-      },
-      { property: "og:title", content: "QA & Testing · Gimena Gauna" },
-      {
-        property: "og:description",
-        content: "QA manual, APIs, rendimiento, automatización con Selenium y agentes de IA.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    meta: pageMeta({
+      title: "QA & Testing · Gimena Gauna",
+      description:
+        "Proyectos de QA de Gimena Gauna: pruebas manuales, APIs con SoapUI y Postman, Selenium y testing con agentes de IA.",
+      path: "/qa",
+    }),
+    links: canonical("/qa"),
   }),
   component: QaPage,
 });
